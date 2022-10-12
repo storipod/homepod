@@ -8,7 +8,7 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "kon-tiki.de",
+    title: "nuxt2-tailwind3-boilerplate",
     htmlAttrs: {
       lang: "en",
     },
