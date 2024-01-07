@@ -85,7 +85,7 @@
 <script>
 import Spinner from "@/components/LoadingSpinner.vue";
 export default {
-  comments: {
+  components: {
     Spinner,
   },
   data() {
@@ -95,7 +95,7 @@ export default {
   },
   mounted() {
     const newQuery = { page: "login" };
-    this.$router.push({ query: newQuery });
+    this.$router.push({ path: "/auth", query: newQuery });
   },
   methods: {
     handleLogin(val) {
