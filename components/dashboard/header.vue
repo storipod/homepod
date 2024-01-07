@@ -4,7 +4,7 @@
       <section
         class="md:flex space-y-6 md:space-y-0 items-center border-b pb-3 hidden"
       >
-        <div class="md:w-2/12">
+        <div class="xl:w-2/12">
           <h1 class="font-medium dark:text-white">Welcome James! 😊</h1>
         </div>
         <div class="flex w-full flex-grow justify-end">

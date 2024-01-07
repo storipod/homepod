@@ -1,6 +1,6 @@
 <template>
-  <div class="md:flex gap-x-10 space-y-10 md:space-y-0">
-    <div class="md:w-6/12 rounded-2xl bg-white p-6 shadow-md border space-y-6">
+  <div class="lg:flex gap-x-10 space-y-10 lg:space-y-0">
+    <div class="lg:w-6/12 rounded-2xl bg-white p-6 shadow-md border space-y-6">
       <div
         class="flex w-full justify-between md:justify-start md:items-start items-center md:flex-col flex-row md:space-y-6"
       >
@@ -11,7 +11,7 @@
 
             <select
               id="Tab"
-              class="md:w-full rounded-md py-2.5 md:py-0 px-3 md:px-0 border-gray-200"
+              class="md:w-full rounded-md py-2.5 md:py-0 px-3 outline-none text-sm md:px-0 bg-gray-300 border-gray-200"
             >
               <option select>Reserved Username</option>
               <option>Reported users</option>
@@ -108,7 +108,7 @@
         </table>
       </div>
     </div>
-    <div class="md:w-6/12 rounded-2xl bg-white p-3 md:p-6 shadow-md border">
+    <div class="lg:w-6/12 rounded-2xl bg-white p-3 md:p-6 shadow-md border">
       <div class="md:flex space-y-6 md:space-y-0 items-center justify-between px-3 md:px-7 py-4">
         <div class="space-y-1">
           <h1 class="font-medium text-lg text-gray-900 dark:text-white">

@@ -3,7 +3,7 @@
     <div
       v-for="(itm, idx) in dashboardStats"
       :key="idx"
-      class="flex flex-col items-start justify-center gap-y-6 border border-white rounded-2xl p-7"
+      class="flex flex-col items-start justify-center gap-y-6 border border-white rounded-2xl p-4 lg:p-7"
       :class="itm.bg"
     >
       <div class="flex items-center gap-x-2">
@@ -13,7 +13,7 @@
         >
       </div>
       <img :src="require(`@/assets/icons/dashboard/${itm.chart}.svg`)" alt="" />
-      <div class="flex items-center gap-x-6">
+      <div class="flex items-center gap-x-4 lg:gap-x-6">
         <img
           v-if="itm.progress"
           src="@/assets/icons/dashboard/increase.svg"
@@ -24,7 +24,7 @@
           src="@/assets/icons/dashboard/decrease.svg"
           alt=""
         />
-        <h1 class="text-3xl font-bold">{{ itm.count }}</h1>
+        <h1 class="text-2xl lg:text-3xl font-bold">{{ itm.count }}</h1>
         <p :class="[itm.progress ? 'text-green-600' : 'text-red-600']">
           {{ itm.rate }}
         </p>

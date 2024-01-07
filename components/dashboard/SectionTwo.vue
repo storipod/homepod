@@ -2,9 +2,9 @@
   <div
     class="md:flex justify-start items-start space-y-10 md:space-y-0 gap-x-10 w-full dark:bg-black"
   >
-    <div class="md:w-9/12"><ActivitiesChart /></div>
+    <div class="lg:w-9/12 md:w-6/12"><ActivitiesChart /></div>
     <div
-      class="md:w-3/12 rounded-lg bg-white shadow-md space-y-6 dark:border dark:border-white"
+      class="lg:w-3/12 md:w-6/12 rounded-lg bg-white shadow-md space-y-6 dark:border dark:border-white"
     >
       <div class="flex items-center justify-between px-7 py-4">
         <h1 class="font-medium text-gray-500">App Store information</h1>
