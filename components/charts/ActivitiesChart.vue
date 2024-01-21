@@ -29,13 +29,13 @@
     </div>
     <client-only>
       <div class="chart-wrapper md:w-full overflow-x-auto">
-        <VueApexCharts
+        <apexchart
           class="md:w-full overflow-x-auto"
           width="1000"
           type="bar"
           :options="chartOptions"
           :series="series"
-        ></VueApexCharts>
+        ></apexchart>
       </div>
     </client-only>
   </div>
@@ -43,9 +43,6 @@
 
 <script>
 export default {
-  components: {
-    VueApexCharts: () => import("vue-apexcharts"),
-  },
   data() {
     return {
       chartOptions: {
@@ -88,6 +85,6 @@ div.chart-wrapper {
   width: "100%";
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 </style>

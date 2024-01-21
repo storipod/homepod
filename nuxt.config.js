@@ -28,7 +28,11 @@ export default {
   css: ["@/assets/css/main.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: "~/plugins/apex-chart.js", ssr: false }],
+  plugins: [
+    { src: "@/plugins/v-select.js", ssr: false },
+    { src: "@/plugins/mavon-editor", ssr: false },
+    { src: "~/plugins/apexcharts", ssr: false },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,6 +55,6 @@ export default {
         autoprefixer: {},
       },
     },
-    vendor: ["vue-apexchart"],
+    // vendor: ["vue-apexchart"],
   },
 };

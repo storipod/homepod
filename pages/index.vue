@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <client-only>
     <div class="chart-wrapper">
       <VueApexCharts
@@ -59,4 +59,15 @@ div.chart-wrapper {
   align-items: center;
   justify-content: center;
 }
+</style> -->
+
+<template>
+  <h1>Storipod admin</h1>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style>
 </style>

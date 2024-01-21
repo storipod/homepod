@@ -2,6 +2,7 @@
   <div
     class="md:flex justify-start items-start space-y-10 md:space-y-0 gap-x-10 w-full dark:bg-black"
   >
+    <!-- <test-chart /> -->
     <div class="lg:w-9/12 md:w-6/12"><ActivitiesChart /></div>
     <div
       class="lg:w-3/12 md:w-6/12 rounded-lg bg-white shadow-md space-y-6 dark:border dark:border-white"
@@ -63,10 +64,12 @@
 </template>
 
 <script>
+// import TestChart from "@/components/TestChart.vue";
 import ActivitiesChart from "@/components/charts/ActivitiesChart.vue";
 export default {
   layout: "dashboard",
   components: {
+    // TestChart,
     ActivitiesChart,
   },
 };

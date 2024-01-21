@@ -2,13 +2,13 @@
   <div>
     <div class="chart-wrapper md:w-full overflow-x-auto">
       <client-only>
-        <VueApexCharts
+        <apexchart
           class="md:w-full overflow-x-auto"
           width="500"
           type="pie"
           :options="chartOptions"
           :series="series"
-        ></VueApexCharts>
+        ></apexchart>
       </client-only>
     </div>
   </div>
@@ -16,9 +16,6 @@
 
 <script>
 export default {
-  components: {
-    VueApexCharts: () => import("vue-apexcharts"),
-  },
   data() {
     return {
       series: [80, 20],
@@ -56,6 +53,6 @@ div.chart-wrapper {
   width: "100%";
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 </style>

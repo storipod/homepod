@@ -1,5 +1,7 @@
 <template>
-  <main class="w-full p-6 relative flex flex-col h-screen dark:border-r dark:border-white">
+  <main
+    class="w-full p-6 relative flex flex-col h-screen dark:border-r dark:border-white"
+  >
     <div class="flex-grow">
       <img src="@/assets/icons/homepod-black.svg" alt="" class="dark:hidden" />
       <img src="@/assets/img/mobileLogo.png" alt="" class="hidden" />
@@ -27,6 +29,7 @@
     </div>
     <div class="w-full">
       <button
+        @click="handleLogout"
         class="bg-[#0cb0bd] flex items-center gap-x-3 w-full rounded-md justify-center py-2.5"
       >
         <img
@@ -41,6 +44,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -100,13 +104,32 @@ export default {
         return localStorage.getItem("theme");
       }
     },
-  }
+  },
+  methods: {
+    handleLogout() {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout!",
+      }).then((result) => {
+        if (result.value) {
+          this.$router.push("/auth");
+        } else {
+          this.$swal("Cancelled", "You're still logged in!", "info");
+        }
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .nuxt-link-exact-active {
-  background-color: black;
+  background-color: #0ba9b9;
   color: white;
 }
 </style>

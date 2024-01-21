@@ -40,6 +40,7 @@
               </div>
               <div>
                 <img
+                  @click="$router.push('/dashboard/users/notify')"
                   src="@/assets/icons/dashboard/bell.svg"
                   alt=""
                   class="cursor-pointer h-8 w-8"
@@ -91,13 +92,14 @@
         </div>
       </section>
       <section>
-        <div class="flex items-center gap-x-3">
+        <!-- <div class="flex items-center gap-x-3">
           <p class="text-gray-300 dark:text-white">Home</p>
           <p>
             <img src="@/assets/icons/dashboard/right-breadcrum.svg" alt="" />
           </p>
           <p class="dark:text-white">Dashboard</p>
-        </div>
+        </div> -->
+        <Breadcrumb />
       </section>
     </div>
     <div
@@ -115,7 +117,12 @@
               src="@/assets/icons/homepod-black.svg"
               alt=""
             />
-            <img v-if="isDarkMode" src="@/assets/img/mobileLogo.png" class="px-3" alt="" />
+            <img
+              v-if="isDarkMode"
+              src="@/assets/img/mobileLogo.png"
+              class="px-3"
+              alt=""
+            />
             <div v-for="({ header, children }, idx) in sidebarItems" :key="idx">
               <h2
                 :class="[header ? 'border-b-[0.2px] border-gray-300' : '']"
@@ -160,10 +167,14 @@
 </template>
 
 <script>
+import Breadcrumb from "@/components/dashboard/Breadcrumb.vue";
 import SidebarComponent from "@/components/dashboard/sidebar.vue";
+import HeaderBreadcrumbs from "./HeaderBreadcrumbs.vue";
 export default {
   components: {
     SidebarComponent,
+    HeaderBreadcrumbs,
+    Breadcrumb,
   },
   data() {
     return {

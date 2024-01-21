@@ -7,8 +7,12 @@
 <script>
 export default {
   mounted() {
-    const newQuery = { page: "login" };
-    this.$router.push({ path: "/auth", query: newQuery });
+    if (!this.$store.state?.auth?.auth?.isLoggedIn) {
+      const newQuery = { page: "login" };
+      this.$router.push({ path: "/auth", query: newQuery });
+    } else {
+      this.$router.push({ path: "/dashboard" });
+    }
   },
 };
 </script>

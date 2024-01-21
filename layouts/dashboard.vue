@@ -4,13 +4,28 @@
       <DashboardSidebar />
     </div>
     <div class="w-9.5/12 w-full flex-grow">
-      <DashboardHeader />
-      <div class="bg-gray-50 dark:bg-black md:h-screen lg:p-4 overflow-y-auto">
-        <Nuxt />
+      <div class="bg-gray-100 dark:bg-black md:h-screen overflow-y-auto">
+        <Nuxt class="" />
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script>
+import Breadcrumb from "@/components/dashboard/Breadcrumb.vue";
+export default {
+  components: {
+    Breadcrumb,
+  },
+};
+// export default {
+//   mounted() {
+//     if (!this.$store.state?.auth?.auth?.isLoggedIn) {
+//       const newQuery = { page: "login" };
+//       this.$router.push({ path: "/auth", query: newQuery });
+//     } else {
+//       this.$router.push({ path: "/dashboard" });
+//     }
+//   },
+// };
 </script>

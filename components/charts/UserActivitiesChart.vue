@@ -1,0 +1,65 @@
+<template>
+  <div
+    class="w-full"
+  >
+    <client-only>
+      <div class="chart-wrapper md:w-full overflow-x-auto w-full">
+        <apexchart
+          class="md:w-full overflow-x-auto w-full"
+          width="100%"
+          type="bar"
+          :options="chartOptions"
+          :series="series"
+        ></apexchart>
+      </div>
+    </client-only>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      chartOptions: {
+        chart: {
+          id: "vuechart-example",
+          toolbar: { show: false },
+          type: "bar",
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 10,
+            horizontal: false,
+            borderRadiusApplication: "around",
+          },
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+        },
+        tooltip: {
+          theme: "light",
+          fillSeriesColor: false,
+        },
+      },
+      series: [
+        {
+          name: "series-1",
+          data: [30, 40, 35, 50, 49, 60, 70, 91],
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style scoped>
+div.chart-wrapper {
+  width: "90%";
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+</style>

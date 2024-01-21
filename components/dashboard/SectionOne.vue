@@ -1,9 +1,11 @@
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10"
+  >
     <div
       v-for="(itm, idx) in dashboardStats"
       :key="idx"
-      class="flex flex-col items-start justify-center gap-y-6 border border-white rounded-2xl p-4 lg:p-7"
+      class="flex flex-col items-center justify-center gap-y-3 border border-white rounded-2xl p-4 lg:p-7"
       :class="itm.bg"
     >
       <div class="flex items-center gap-x-2">
@@ -12,22 +14,24 @@
           >({{ itm.subTitle }})</span
         >
       </div>
-      <img :src="require(`@/assets/icons/dashboard/${itm.chart}.svg`)" alt="" />
-      <div class="flex items-center gap-x-4 lg:gap-x-6">
-        <img
-          v-if="itm.progress"
-          src="@/assets/icons/dashboard/increase.svg"
-          alt=""
-        />
-        <img
-          v-if="!itm.progress"
-          src="@/assets/icons/dashboard/decrease.svg"
-          alt=""
-        />
+      <!-- <img :src="require(`@/assets/icons/dashboard/${itm.chart}.svg`)" alt="" /> -->
+      <div class="flex items-center flex-col gap-x-4 lg:gap-x-6 mt-3">
         <h1 class="text-2xl lg:text-3xl font-bold">{{ itm.count }}</h1>
-        <p :class="[itm.progress ? 'text-green-600' : 'text-red-600']">
-          {{ itm.rate }}
-        </p>
+        <div class="flex items-center gap-x-2">
+          <img
+            v-if="itm.progress"
+            src="@/assets/icons/dashboard/increase.svg"
+            alt=""
+          />
+          <img
+            v-if="!itm.progress"
+            src="@/assets/icons/dashboard/decrease.svg"
+            alt=""
+          />
+          <p :class="[itm.progress ? 'text-green-600' : 'text-red-600']">
+            {{ itm.rate }}
+          </p>
+        </div>
       </div>
       <p class="text-[#6E717C] text-sm">{{ itm.desc }}</p>
     </div>
@@ -61,7 +65,7 @@ export default {
         },
         {
           title: "Stori",
-          count: "180k",
+          count: "180,000",
           desc: "Compared from Last Month",
           rate: "-9.7%",
           progress: false,
