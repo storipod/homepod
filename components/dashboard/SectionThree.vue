@@ -4,14 +4,14 @@
       <div
         class="flex w-full justify-between md:justify-start md:items-start items-center md:flex-col flex-row md:space-y-6"
       >
-        <h1 class="font-medium text-lg dark:text-white">Most Recent</h1>
+        <h1 class="font-medium text-sm md:text-lg dark:text-white">Most Recent</h1>
         <div>
           <div class="sm:hidden">
             <label for="Tab" class="sr-only">Tab</label>
 
             <select
               id="Tab"
-              class="md:w-full rounded-md py-2.5 md:py-0 px-3 outline-none text-sm md:px-0 bg-gray-300 border-gray-200"
+              class="md:w-full text-xs rounded-md py-2.5 md:py-0 px-3 outline-none md:text-sm md:px-0 bg-gray-300 border-gray-200"
             >
               <option select>Reserved Username</option>
               <option>Reported users</option>
@@ -86,20 +86,21 @@
                 <img
                   :src="require(`@/assets/icons/dashboard/${itm.avatar}.svg`)"
                   alt=""
+                  class="w-30"
                 />
               </td>
               <td
-                class="whitespace-nowrap px-4 py-6 text-gray-700 dark:text-white"
+                class="whitespace-nowrap text-xs md:text-sm px-4 py-6 text-gray-700 dark:text-white"
               >
                 {{ itm.name }}
               </td>
               <td
-                class="whitespace-nowrap px-4 py-6 text-gray-700 dark:text-white"
+                class="whitespace-nowrap text-xs md:text-sm px-4 py-6 text-gray-700 dark:text-white"
               >
                 {{ itm.email }}
               </td>
               <td
-                class="whitespace-nowrap px-4 py-6 text-gray-700 dark:text-white"
+                class="whitespace-nowrap text-xs md:text-sm px-4 py-6 text-gray-700 dark:text-white"
               >
                 <img src="@/assets/icons/arrow-right.svg" alt="" />
               </td>

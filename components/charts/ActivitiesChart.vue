@@ -3,7 +3,7 @@
     class="bg-white dark:bg-black shadow rounded-md p-6 md:p-10 space-y-3 dark:border dark:border-white"
   >
     <div class="md:flex space-y-4 md:space-y-0 justify-between items-center">
-      <h1 class="text-gray-700 text-lg dark:text-white">
+      <h1 class="text-gray-700 text-sm md:text-lg font-semibold dark:text-white">
         Live traffic of logged in Active users
       </h1>
       <div class="flex items-center gap-x-3">

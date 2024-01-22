@@ -1,14 +1,31 @@
 <template>
   <main>
     <DashboardHeader />
-    <div class="mx-6 py-6">
+    <div class="mx-3 md:mx-6 py-6">
       <form
         @submit.prevent="createUser"
-        class="space-y-8 bg-white p-6 lg:px-16 py-10 rounded-2xl"
+        class="space-y-8 bg-white p-4 lg:px-16 py-10 rounded-2xl"
       >
         <div class="space-y-3">
           <p class="text-gray-900 font-semibold">Profile image</p>
-          <img src="@/assets/icons/dashboard/camera.svg" alt="" />
+          <div>
+            <label class="">
+              <image-zoom
+                v-if="imageSrc"
+                :src="imageSrc"
+                alt=""
+                class="has-animation h-20 w-20 object-cover object-center border-[0.8px] border-gray-400 shadow rounded-full"
+              />
+
+              <img
+                v-if="!imageSrc"
+                src="@/assets/icons/dashboard/camera.svg"
+                alt=""
+                class="h-20 w-20"
+              />
+              <input @change="onFileChange" type="file" class="hidden" />
+            </label>
+          </div>
         </div>
         <div
           class="lg:flex space-y-3 lg:space-y-0 justify-between items-center gap-x-10"
@@ -147,6 +164,7 @@
 </template>
 
 <script>
+import ImageZoom from "@/components/dashboard/ImageZoom.vue";
 import GeneralModal from "@/components/modals/GeneralModal.vue";
 import UserCreationConfirmation from "~/components/modals/UserCreationConfirmation.vue";
 import UserCreationSuccess from "~/components/modals/UserCreationSuccess.vue";
@@ -157,6 +175,7 @@ export default {
       showModal: false,
       isConfirmCreatingUserModal: false,
       isUserSuccessfullyCreatedModal: false,
+      imageSrc: null,
       showPassword: false,
       form: {
         fname: "",
@@ -205,11 +224,36 @@ export default {
       this.isConfirmCreatingUserModal = false;
       this.isUserSuccessfullyCreatedModal = true;
     },
+    onFileChange(e) {
+      const file = e.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+          this.imageSrc = URL.createObjectURL(file);
+        } else {
+          this.imageSrc = null;
+          // You can also add error handling here
+        }
+    },
   },
   components: {
     GeneralModal,
     UserCreationConfirmation,
     UserCreationSuccess,
+    ImageZoom,
   },
 };
 </script>
+
+<style scoped>
+.has-animation {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>

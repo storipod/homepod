@@ -11,7 +11,7 @@
         </nuxt-link>
       </template>
     </DashboardHeader>
-    <div class="space-y-6 mx-10 my-6">
+    <div class="space-y-6 mx-3 md:mx-10 my-6">
       <section class="bg-white rounded-lg lg:flex h-screen">
         <section class="lg:w-6/12 border-r border-gray-200 p-10">
           <div class="flex justify-between items-center">

@@ -1,10 +1,10 @@
 <template>
   <main>
     <DashboardHeader />
-    <div class="mx-6">
+    <div class="mx-3 md:mx-6">
       <table-tabs />
     </div>
-    <section class="bg-white rounded-lg p-6 lg:p-10 space-y-10 mx-6 pb-6">
+    <section class="bg-white md:rounded-lg p-6 lg:p-10 space-y-10 mx-3 pb-6 mt-6">
       <div class="lg:flex justify-between items-center space-y-3 lg:space-y-0">
         <div>
           <h1 class="font-semibold text-gray-900">Stori</h1>

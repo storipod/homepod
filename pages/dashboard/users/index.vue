@@ -1,6 +1,6 @@
 <template>
   <main>
-    <DashboardHeader @search="handleSearch">
+    <DashboardHeader @search="handleSearch" class="">
       <template v-slot:action>
         <nuxt-link
           to="/dashboard/users/new"
@@ -14,7 +14,7 @@
     </DashboardHeader>
     <div class="px-4 sm:px-6 lg:px-8">
       <table-tabs />
-      <div class="flow-root bg-white rounded-md p-3">
+      <div class="flow-root bg-white rounded-md p-3 mt-6 md:mt-0">
         <div class="lg:flex justify-end items-end">
           <div class="lg:flex items-center gap-x-6 space-y-3 lg:space-y-0">
             <div class="flex items-center gap-x-10">
@@ -70,7 +70,7 @@
                 </button>
               </div>
               <table class="min-w-full table-fixed divide-y divide-gray-300">
-                <thead>
+                <thead class="">
                   <tr>
                     <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
                       <input
@@ -283,7 +283,7 @@
               </table>
             </div>
           </div>
-          <div class="flex justify-end items-end pr-6 pt-6">
+          <div class="lg:flex justify-end items-end lg:pr-6 pt-6 hidden">
             <PaginationTable
               :totalPages="totalPages"
               :currentPage="currentPage"
@@ -471,6 +471,45 @@ export default {
           stori: "96",
           isActive: false,
         },
+        {
+          id: 1,
+          avatar: "avatar-girl",
+          username: "vick_yy",
+          fname: "Abang",
+          lname: "Victor",
+          interest: "Funky gists",
+          interest_count: "+3",
+          phone: "080007120090",
+          email: "Victor.abang@gmail.com",
+          stori: "96",
+          isActive: true,
+        },
+        {
+          id: 2,
+          avatar: "avatar-girl",
+          username: "vick_yy",
+          fname: "Abang",
+          lname: "Victor",
+          interest: "Funky gists",
+          interest_count: "",
+          phone: "080007120090",
+          email: "Marquis.abang@gmail.com",
+          stori: "96",
+          isActive: false,
+        },
+        {
+          id: 3,
+          avatar: "avatar-girl",
+          username: "vick_yy",
+          fname: "Abang",
+          lname: "Victor",
+          interest: "Funky gists",
+          interest_count: "",
+          phone: "080007120090",
+          email: "Ann.abang@gmail.com",
+          stori: "96",
+          isActive: true,
+        }
       ],
       selectedPeople: [],
     };

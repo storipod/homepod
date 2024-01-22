@@ -179,7 +179,7 @@ export default {
   data() {
     return {
       isDarkMode: false,
-      showSidebar: false,
+      showSidebar: true,
       sidebarItems: [
         {
           header: "",
@@ -241,6 +241,8 @@ export default {
       }
     },
     toggleSidebar() {
+      console.log("hello world");
+      alert("hello world");
       this.showSidebar = !this.showSidebar;
     },
   },

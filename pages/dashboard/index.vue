@@ -1,7 +1,7 @@
 <template>
   <main class="">
-    <DashboardHeader @search="handleDashboardSearch"> </DashboardHeader>
-    <div class="p-6 px-10 space-y-10" v-if="!search.length">
+    <DashboardHeader @search="handleDashboardSearch" />
+    <div class="p-4 md:px-10 space-y-10" v-if="!search.length">
       <section-one />
       <section-two />
       <section-three />
