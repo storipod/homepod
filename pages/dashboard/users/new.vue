@@ -2,23 +2,20 @@
   <main>
     <DashboardHeader />
     <div class="mx-3 md:mx-6 py-6">
-      <form
-        @submit.prevent="createUser"
-        class="space-y-8 bg-white p-4 lg:px-16 py-10 rounded-2xl"
-      >
+      <div class="space-y-8 bg-white p-4 lg:px-20 py-10 rounded-2xl">
         <div class="space-y-3">
           <p class="text-gray-900 font-semibold">Profile image</p>
           <div>
             <label class="">
               <image-zoom
-                v-if="imageSrc"
-                :src="imageSrc"
+                v-if="form.imageSrc"
+                :src="form.imageSrc"
                 alt=""
                 class="has-animation h-20 w-20 object-cover object-center border-[0.8px] border-gray-400 shadow rounded-full"
               />
 
               <img
-                v-if="!imageSrc"
+                v-if="!form.imageSrc"
                 src="@/assets/icons/dashboard/camera.svg"
                 alt=""
                 class="h-20 w-20"
@@ -140,42 +137,87 @@
             Cancel
           </button>
           <button
+            :disabled="!isFormEmpty"
+            @click="$bvModal.show('createUserConfirmationModal')"
             type="submit"
             class="bg-[#0BA9B9] disabled:cursor-not-allowed disabled:opacity-25 text-white px-6 py-2 rounded-lg"
           >
             Create
           </button>
         </div>
-      </form>
+      </div>
     </div>
     <div>
-      <user-creation-confirmation
-        @close="isConfirmCreatingUserModal = false"
-        @proceed="handleProceedToCreateUser"
-        :isLoading="isConfirmCreatingUserModal"
-      />
-      <user-creation-success
-        @close="isUserSuccessfullyCreatedModal = false"
-        @proceed="isUserSuccessfullyCreatedModal = false"
-        :isLoading="isUserSuccessfullyCreatedModal"
-      />
+      <b-modal
+        id="createUserConfirmationModal"
+        hide-header
+        hide-footer
+        centered
+      >
+        <section class="bg-white p-6 space-y-4 max-w-screen-lg rounded-md">
+          <div>
+            <img src="@/assets/icons/warning.svg" alt="warning" />
+          </div>
+          <div>
+            <h1 class="font-semibold text-xl">Confirm</h1>
+            <p class="text-gray-500">
+              Are you sure you want to continue?
+            </p>
+          </div>
+          <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+            <button
+              @click="$bvModal.hide('createUserConfirmationModal')"
+              class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg"
+            >
+              Cancel
+            </button>
+            <button
+              :disabled="processing"
+              @click="createUser"
+              class="bg-[#0BA9B9] text-sm disabled:cursor-not-allowed disabled:opacity-25 w-full text-white font-medium px-6 py-3 rounded-lg"
+            >
+              {{ processing ? "processing" : "Continue" }}
+            </button>
+          </div>
+        </section>
+      </b-modal>
+
+      <b-modal id="createUserSuccessModal" hide-header centered hide-footer>
+        <section class="bg-white p-6 space-y-4 max-w-screen-lg rounded-md">
+          <div>
+            <img src="@/assets/icons/success.svg" alt="warning" />
+          </div>
+          <div>
+            <h1 class="font-semibold text-xl">Success</h1>
+            <p class="text-gray-500">New user added.</p>
+          </div>
+          <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+            <button
+              @click="$bvModal.hide('createUserSuccessModal')"
+              class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg"
+            >
+              Create another
+            </button>
+            <button
+              @click="$router.push('/dashboard/users')"
+              class="bg-[#0BA9B9] text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+            >
+              Continue
+            </button>
+          </div>
+        </section>
+      </b-modal>
     </div>
   </main>
 </template>
 
 <script>
-import ImageZoom from "@/components/dashboard/ImageZoom.vue";
-import GeneralModal from "@/components/modals/GeneralModal.vue";
-import UserCreationConfirmation from "~/components/modals/UserCreationConfirmation.vue";
-import UserCreationSuccess from "~/components/modals/UserCreationSuccess.vue";
 export default {
   layout: "dashboard",
   data() {
     return {
       showModal: false,
-      isConfirmCreatingUserModal: false,
-      isUserSuccessfullyCreatedModal: false,
-      imageSrc: null,
+      processing: false,
       showPassword: false,
       form: {
         fname: "",
@@ -186,6 +228,7 @@ export default {
         confirmPassword: "",
         gender: "",
         dob: "",
+        imageSrc: null,
       },
       genderType: [
         {
@@ -217,28 +260,23 @@ export default {
     },
   },
   methods: {
-    createUser() {
-      this.isConfirmCreatingUserModal = true;
-    },
-    handleProceedToCreateUser() {
-      this.isConfirmCreatingUserModal = false;
-      this.isUserSuccessfullyCreatedModal = true;
-    },
     onFileChange(e) {
       const file = e.target.files[0];
-        if (file && file.type.startsWith("image/")) {
-          this.imageSrc = URL.createObjectURL(file);
-        } else {
-          this.imageSrc = null;
-          // You can also add error handling here
-        }
+      if (file && file.type.startsWith("image/")) {
+        this.form.imageSrc = URL.createObjectURL(file);
+      } else {
+        this.form.imageSrc = null;
+        // You can also add error handling here
+      }
     },
-  },
-  components: {
-    GeneralModal,
-    UserCreationConfirmation,
-    UserCreationSuccess,
-    ImageZoom,
+    createUser() {
+      this.processing = true;
+      setTimeout(() => {
+        this.processing = false;
+        this.$bvModal.hide("createUserConfirmationModal");
+        this.$bvModal.show("createUserSuccessModal");
+      }, 2000);
+    },
   },
 };
 </script>

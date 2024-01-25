@@ -8,7 +8,7 @@
       class="lg:w-3/12 md:w-6/12 rounded-lg bg-white shadow-md space-y-6 dark:border dark:border-white"
     >
       <div class="flex items-center justify-between px-7 py-4">
-        <h1 class="font-medium text-gray-500">App Store information</h1>
+        <h6 class="font-medium text-gray-500">App Store information</h6>
         <select
           class="text-sm font-medium outline-none bg-gray-100 rounded-md px-2.5 py-2"
         >
@@ -23,7 +23,7 @@
             <img src="@/assets/icons/dashboard/android-badge.svg" alt="" />
             <div class="space-y-4">
               <div class="flex items-center space-x-4">
-                <h1 class="font-bold text-3xl dark:text-white">625</h1>
+                <h2 class="font-bold text-3xl dark:text-white">625</h2>
                 <img
                   src="@/assets/icons/dashboard/increase.svg"
                   alt=""
@@ -37,7 +37,7 @@
               </div>
             </div>
             <div>
-              <h1 class="text-green-500 font-medium">+2.4%</h1>
+              <h2 class="text-green-500 font-medium">+2.4%</h2>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
           <img src="@/assets/icons/dashboard/ios-badge.svg" alt="" />
           <div class="space-y-4">
             <div class="flex items-center space-x-4">
-              <h1 class="font-bold text-3xl dark:text-white">902</h1>
+              <h2 class="font-bold text-3xl dark:text-white">902</h2>
               <img src="@/assets/icons/dashboard/decrease.svg" alt="" />
             </div>
             <p class="text-gray-400">Downloads</p>
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div>
-            <h1 class="text-green-500 font-medium">+2.4%</h1>
+            <h2 class="text-green-500 font-medium">+2.4%</h2>
           </div>
         </div>
       </div>

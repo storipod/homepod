@@ -16,7 +16,7 @@
         <p class="text-gray-400">{{ person.username }}</p>
       </div>
     </div>
-    <remove-user-confirmation-modal
+    <!-- <remove-user-confirmation-modal
       @proceed="handleProceedRemoval"
       @close="isConfirmingRemoveUser = false"
       :isLoading="isConfirmingRemoveUser"
@@ -50,29 +50,15 @@
       :isLoading="isSuspendSuccessModal"
       @close="isSuspendSuccessModal = false"
       @proceed="isSuspendSuccessModal = false"
-    />
+    /> -->
   </main>
 </template>
 
 <script>
 import ImageZoom from "@/components/dashboard/ImageZoom.vue";
-import ActivateUserConfirmationModal from "@/components/modals/ActivateUserConfirmationModal.vue";
-import ActivateUserSuccessModal from "@/components/modals/ActivateUserSuccessModal.vue";
-import RemoveUserConfirmationModal from "@/components/modals/RemoveUserConfirmationModal.vue";
-import RemoveUserSuccessModal from "@/components/modals/RemoveUserSuccessModal.vue";
-import UserSuspendModal from "@/components/modals/UserSuspendModal.vue";
-import UserSuspendConfirmation from "@/components/modals/UserSuspendModal.vue";
-import UserSuspendSuccess from "@/components/modals/UserSuspendModal.vue";
 export default {
   components: {
     ImageZoom,
-    RemoveUserConfirmationModal,
-    ActivateUserConfirmationModal,
-    ActivateUserSuccessModal,
-    RemoveUserSuccessModal,
-    UserSuspendModal,
-    UserSuspendConfirmation,
-    UserSuspendSuccess,
   },
   props: {
     users: {

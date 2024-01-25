@@ -9,32 +9,28 @@
         class="rounded-lg border border-gray-200 space-y-6"
       >
         <div class="flex justify-end items-end px-4 pt-4 relative">
-          <img
-            class="cursor-pointer"
-            @click="toggleDropdown(idx)"
-            src="@/assets/icons/horizontal-more.svg"
-            alt=""
-          />
-          <div
-            v-if="openDropdown === idx"
-            class="absolute mt-2 w-40 top-4 h-32 bg-white rounded-lg border-[0.7px] shadow-xl z-50 px-6 pt-6"
+          <b-dropdown
+            id="dropdown-1"
+            class="m-md-2"
+            variant="link"
+            right
+            toggle-class="text-decoration-none"
+            no-caret
           >
-            <div class="space-y-3 flex justify-start items-start flex-col">
-              <div>
-                <button @click="notifyUser(itm)" class="font-medium">
-                  Notify User
-                </button>
-              </div>
-              <div>
-                <button
-                  class="text-red-500 font-medium"
-                  @click="removeUser(itm)"
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          </div>
+            <template #button-content>
+              <img
+                class="cursor-pointer"
+                src="@/assets/icons/horizontal-more.svg"
+                alt=""
+              />
+            </template>
+            <b-dropdown-item-button @click="notifyUser(itm)">
+              Notify User</b-dropdown-item-button
+            >
+            <b-dropdown-item-button @click="removeUser(itm)">
+              Remove</b-dropdown-item-button
+            >
+          </b-dropdown>
         </div>
         <div class="px-4">
           <img
@@ -55,47 +51,170 @@
         </div>
       </div>
     </div>
-    <notify-user-modal
-      :isLoading="isNotifyUser"
-      @proceed="handleProceedToNotify"
-    />
-    <notify-user-success
-      :isLoading="isNotificationSuccess"
-      @proceed="isNotificationSuccess = false"
-      @close="isNotificationSuccess = false"
-    />
-    <remove-stori-confirmation
-      @proceed="handleConfirmRemoveStori"
-      @close="isRemoveStoriConfirmation = false"
-      :isLoading="isRemoveStoriConfirmation"
-    />
-    <remove-stori-success
-      @close="isRemoveStoriSuccess = false"
-      :isLoading="isRemoveStoriSuccess"
-    />
+
+    <b-modal id="notifyUserModal" size="lg" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <h1 class="text-xl text-gray-900 font-semibold">Notify user</h1>
+          <p class="text-sm text-gray-500">
+            Use this form to send a user update
+          </p>
+        </div>
+        <div class="space-y-2">
+          <label class="text-sm text-gray-900 font-medium"
+            >Message category</label
+          >
+          <select
+            v-model="form.category"
+            class="bg-gray-50 text-sm rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
+          >
+            <option>Violation of story policies</option>
+            <option>Sharing Nudes</option>
+          </select>
+        </div>
+        <div class="w-full space-y-2">
+          <label class="text-sm font-medium">Description</label>
+          <div class="mavonEditor z-0">
+            <no-ssr>
+              <mavon-editor
+                :language="'en'"
+                :toolbars="markdownOption"
+                v-model="form.desc"
+              />
+            </no-ssr>
+          </div>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            :disabled="processingNotification || !isNotificationFormEnabled"
+            @click="handleNotification"
+            class="bg-[#0BA9B9]text-sm disabled:cursor-not-allowed bg-[#0BA9B9] disabled:opacity-25 w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            {{ processingNotification ? "processing..." : "Notify user" }}
+          </button>
+        </div>
+      </section>
+    </b-modal>
+
+    <b-modal id="notifyUserSuccessModal" hide-header centered hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/success.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Success</h1>
+          <p class="text-gray-600">Message has been sent.</p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('notifyUserSuccessModal')"
+            class="text-[#0BA9B9] text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg"
+          >
+            Create another
+          </button>
+          <button
+            @click="$bvModal.hide('notifyUserSuccessModal')"
+            class="bg-[#0BA9B9] text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            Continue
+          </button>
+        </div>
+      </section>
+    </b-modal>
+
+    <b-modal id="removeStoriConfirmation" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/danger.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Remove story</h1>
+          <p class="text-gray-500">
+            Are you sure you want to delete this story? This action cannot be
+            undone.
+          </p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('removeStoriConfirmation')"
+            class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            :disabled="processingDelete"
+            @click="handleRemoveStori"
+            class="bg-[#D92D20] disabled:cursor-not-allowed disabled:opacity-25 text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            {{ processingDelete ? "processing..." : "Remove" }}
+          </button>
+        </div>
+      </section>
+    </b-modal>
+
+    <b-modal id="removeStoriSuccess" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/success.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Story removed</h1>
+          <p class="text-gray-500">
+            You have successfully removed the story, kindly note that it cannot
+            be recovered.
+          </p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('removeStoriSuccess')"
+            class="bg-[#000000] text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            Close
+          </button>
+        </div>
+      </section>
+    </b-modal>
   </main>
 </template>
 
 <script>
-import NotifyUserModal from "@/components/modals/NotifyUserModal.vue";
-import NotifyUserSuccess from "@/components/modals/NotifyUserSuccess.vue";
-import RemoveStoriConfirmation from "@/components/modals/RemoveStoriConfirmation.vue";
-import RemoveStoriSuccess from "@/components/modals/RemoveStoriSuccess.vue";
 export default {
   data() {
     return {
-      isNotifyUser: false,
-      isNotificationSuccess: false,
-      isRemoveStoriConfirmation: false,
-      isRemoveStoriSuccess: false,
-      openDropdown: null,
+      value: "",
+      processingNotification: false,
+      processingDelete: false,
+      markdownOption: {
+        bold: true,
+        italic: true,
+        header: true,
+        underline: true,
+        strikethrough: true,
+        mark: true,
+        superscript: true,
+        subscript: true,
+        quote: true,
+        ol: true,
+        ul: true,
+        link: true,
+      },
+      form: {
+        category: "",
+        desc: "",
+      },
     };
-  },
-  components: {
-    NotifyUserSuccess,
-    NotifyUserModal,
-    RemoveStoriConfirmation,
-    RemoveStoriSuccess,
   },
   props: {
     stories: {
@@ -104,18 +223,32 @@ export default {
     },
   },
   methods: {
-    toggleDropdown(itmId) {
-      if (this.openDropdown === itmId) {
-        this.openDropdown = null;
-      } else {
-        this.openDropdown = itmId;
-      }
-    },
     notifyUser() {
-      this.isNotifyUser = true;
+      this.$bvModal.show("notifyUserModal");
+    },
+    handleNotification() {
+      this.processingNotification = true;
+      setTimeout(() => {
+        this.$bvModal.hide("notifyUserModal");
+        this.$bvModal.show("notifyUserSuccessModal");
+        this.processingNotification = false;
+      }, 3000);
+    },
+    handleRemoveStori() {
+      this.processingDelete = true;
+      setTimeout(() => {
+        this.$bvModal.hide("removeStoriConfirmation");
+        this.$bvModal.show("removeStoriSuccess");
+        this.processingDelete = false;
+      }, 3000);
     },
     removeUser() {
-      this.isRemoveStoriConfirmation = true;
+      this.$bvModal.show("removeStoriConfirmation");
+    },
+  },
+  computed: {
+    isNotificationFormEnabled() {
+      return this.form.desc && this.form.category;
     },
   },
 };

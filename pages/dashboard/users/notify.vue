@@ -5,7 +5,7 @@
         <nuxt-link
           to="/dashboard/users/create-notification"
           type="button"
-          class="rounded-md flex items-center gap-x-3 bg-[#0BA9B9] px-6 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="rounded-md flex items-center no-underline gap-x-3 bg-[#0BA9B9] px-6 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           New
         </nuxt-link>
@@ -15,7 +15,7 @@
       <section class="bg-white rounded-lg lg:flex h-screen">
         <section class="lg:w-6/12 border-r border-gray-200 p-10">
           <div class="flex justify-between items-center">
-            <h1 class="font-semibold text-gray-950">Messages</h1>
+            <h5 class="font-semibold text-gray-950">Messages</h5>
             <div class="flex items-center gap-x-3">
               <img src="@/assets/icons/dashboard/search.svg" alt="" />
               <select
@@ -99,7 +99,7 @@
             </div>
             <div class="space-y-6 pl-8">
               <div class="space-y-2">
-                <h1 class="text-gray-900 font-semibold">Sent to</h1>
+                <h6 class="text-gray-900 font-semibold">Sent to</h6>
                 <div class="flex items-center gap-x-2">
                   <img
                     src="@/assets/icons/dashboard/users.svg"
@@ -110,7 +110,7 @@
                 </div>
               </div>
               <div class="space-y-2">
-                <h1 class="text-gray-900 font-semibold">Sent as</h1>
+                <h6 class="text-gray-900 font-semibold">Sent as</h6>
                 <div class="flex items-center gap-x-2">
                   <img
                     src="@/assets/icons/dashboard/flash.svg"

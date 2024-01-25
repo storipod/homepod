@@ -1,27 +1,27 @@
 <template>
   <main>
-    <header class="space-y-3 bg-white p-6">
+    <header class="space-y-3 bg-white px-6 py-3">
       <section
-        class="md:flex space-y-6 md:space-y-0 items-center border-b pb-3 hidden"
+        class="md:flex space-y-6 md:space-y-0 items-center border-b hidden"
       >
         <div class="xl:w-2/12">
-          <h1 class="font-medium dark:text-white">
-            Welcome James! 😊 {{ form.search }}
-          </h1>
+          <h6 class="font-medium dark:text-white text-sm">
+            Welcome James! 😊
+          </h6>
         </div>
         <div class="flex w-full flex-grow justify-end">
-          <div class="flex items-center gap-x-10">
+          <div class="flex items-center gap-x-10 pb-3">
             <div class="relative w-full">
               <input
                 type="text"
                 v-model="form.search"
                 placeholder="Search keyword"
-                class="w-full rounded-md bg-gray-100 px-3 py-2.5 pl-10 text-sm outline-none"
+                class="w-full rounded-md bg-gray-100 px-3 py-2.5 pl-32 text-sm outline-none"
               />
               <img
                 src="@/assets/icons/dashboard/search.svg"
                 alt=""
-                class="absolute left-4 top-2"
+                class="absolute left-2 top-2"
               />
             </div>
             <div class="flex justify-between items-center gap-x-4">
@@ -57,7 +57,7 @@
         class="flex items-center justify-between border-b pb-3 md:hidden"
       >
         <div class="md:w-2/12">
-          <h1 class="font-medium dark:text-white">Welcome James! 😊</h1>
+          <h6 class="font-medium dark:text-white">Welcome James! 😊</h6>
         </div>
         <div class="flex justify-between items-center gap-x-4">
           <div>
@@ -95,9 +95,7 @@
         </div>
       </section>
       <div class="text-white flex justify-between items-center">
-        <div>
-          <Breadcrumb />
-        </div>
+        <Breadcrumb />
         <slot name="action"> </slot>
       </div>
     </header>
@@ -123,25 +121,25 @@
               alt=""
             />
             <div v-for="({ header, children }, idx) in sidebarItems" :key="idx">
-              <h2
+              <h6
                 :class="[header ? 'border-b-[0.2px] border-gray-300' : '']"
                 class="py-3 pb-3 text-[#B3BBCA]"
               >
                 {{ header }}
-              </h2>
+              </h6>
               <div class="w-full space-y-1 rounded">
-                <NuxtLink
+                <nuxt-link
                   v-for="itm in children"
                   @click.native="toggleSidebar"
                   :key="itm.title"
-                  class="flex w-full items-center gap-x-3 rounded-md px-3 py-2.5 leading-loose text-black dark:text-white"
+                  class="flex w-full no-underline items-center gap-x-3 text-gray-500 rounded-md px-3 py-2.5 leading-loose dark:text-white"
                   :to="itm.urlPath"
                   ><img
                     :src="require(`@/assets/icons/dashboard/${itm.icon}.svg`)"
                     alt=""
                   />
                   {{ itm.title }}
-                </NuxtLink>
+                </nuxt-link>
               </div>
             </div>
           </div>

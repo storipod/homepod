@@ -8,22 +8,22 @@
       <div v-for="({ header, children }, idx) in sidebarItems" :key="idx">
         <h2
           :class="[header ? 'border-b-[0.2px] border-gray-300' : '']"
-          class="py-3 pb-3 text-[#B3BBCA]"
+          class="py-3 pb-3 text-sm text-[#B3BBCA]"
         >
           {{ header }}
         </h2>
         <div class="w-full space-y-1 rounded">
-          <NuxtLink
+          <nuxt-link
             v-for="itm in children"
             :key="itm.title"
-            class="flex w-full items-center gap-x-3 rounded-md px-3 py-2.5 leading-loose text-black dark:text-white"
+            class="flex w-full items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose text-black dark:text-white"
             :to="itm.urlPath"
             ><img
               :src="require(`@/assets/icons/dashboard/${itm.icon}.svg`)"
               alt=""
             />
             {{ itm.title }}
-          </NuxtLink>
+          </nuxt-link>
         </div>
       </div>
     </div>

@@ -65,7 +65,7 @@
           <div class="w-full pt-10">
             <button
               :disabled="!isFormEmpty || processing"
-              class="flex w-full shrink-0 items-center justify-center gap-x-3 rounded-md border border-white bg-[#0BA9B9] px-12 py-4 text-sm font-medium text-white transition hover:bg-transparent disabled:cursor-not-allowed disabled:opacity-25"
+              class="flex w-full shrink-0 items-center justify-center gap-x-3 rounded-md border border-white bg-[#0BA9B9] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent disabled:cursor-not-allowed disabled:opacity-25"
               @click="handleLogin"
             >
               <img src="@/assets/icons/arrow-right-white.svg" alt="" />

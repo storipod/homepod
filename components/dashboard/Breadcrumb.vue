@@ -1,7 +1,7 @@
 <template>
   <nav class="text-gray-700">
-    <ol class="list-reset flex">
-      <nuxt-link to="/dashboard">Home</nuxt-link>
+    <ol class="flex items-center px-0 mx-0">
+      <nuxt-link to="/dashboard" class="no-underline">Home</nuxt-link>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="21"
@@ -20,9 +20,12 @@
         :key="index"
         class="flex items-center"
       >
-        <nuxt-link :to="breadcrumb.to" :class="breadcrumbClass(index)">{{
-          breadcrumb.text
-        }}</nuxt-link>
+        <nuxt-link
+          class="no-underline px-0 mx-0"
+          :to="breadcrumb.to"
+          :class="breadcrumbClass(index)"
+          >{{ breadcrumb.text }}</nuxt-link
+        >
         <span v-if="index < breadcrumbs.length - 1" class="mx-2"
           ><svg
             xmlns="http://www.w3.org/2000/svg"

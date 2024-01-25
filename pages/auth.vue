@@ -23,8 +23,8 @@
         >
           <div class="absolute right-10 top-4 flex items-end justify-end">
             <div class="flex items-center gap-x-10">
-              <nuxt-link to="/">Terms</nuxt-link>
-              <nuxt-link to="/">Privacy</nuxt-link>
+              <nuxt-link class="no-underline text-gray-800" to="/">Terms</nuxt-link>
+              <nuxt-link class="no-underline text-gray-800" to="/">Privacy</nuxt-link>
             </div>
           </div>
           <div class="flex flex-col items-center justify-center">

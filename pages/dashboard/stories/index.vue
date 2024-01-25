@@ -2,19 +2,31 @@
   <main>
     <DashboardHeader />
     <div class="mx-3 md:mx-6">
-      <table-tabs />
+      <table-tabs class="mt-4" />
     </div>
-    <section class="bg-white md:rounded-lg p-6 lg:p-10 space-y-10 mx-3 pb-6 mt-6">
+    <section
+      class="bg-white md:rounded-lg p-6 lg:p-10 space-y-10 mx-3 pb-6"
+    >
       <div class="lg:flex justify-between items-center space-y-3 lg:space-y-0">
         <div>
-          <h1 class="font-semibold text-gray-900">Stori</h1>
+          <h6 class="font-semibold text-gray-900">Stori</h6>
         </div>
         <div>
           <div class="flex items-center gap-x-10">
             <img src="@/assets/icons/dashboard/search.svg" cl alt="" />
-            <div class="flex items-center gap-x-1">
+            <!-- <div class="flex items-center gap-x-1">
               <h1 class="font-semibold text-gray-300">Sort by:</h1>
               <select class="outline-none border-none text-gray-900">
+                <option>Newest</option>
+                <option>Popularity</option>
+                <option>Time</option>
+              </select>
+            </div> -->
+            <div class="flex items-center gap-x-3">
+              <p class="font-semibold text-sm text-gray-600 mt-3">Sort by:</p>
+              <select
+                class="outline-none border-none text-sm bg-gray-100 py-2 px-3 rounded-md text-gray-900"
+              >
                 <option>Newest</option>
                 <option>Popularity</option>
                 <option>Time</option>
@@ -108,11 +120,7 @@
 </template>
 
 <script>
-import StoriesCardList from '@/components/stories/storiesCardList.vue'
-import NotifyUserModal from "@/components/modals/NotifyUserModal.vue";
-import NotifyUserSuccess from "@/components/modals/NotifyUserSuccess.vue";
-import RemoveStoriConfirmation from "@/components/modals/RemoveStoriConfirmation.vue";
-import RemoveStoriSuccess from "@/components/modals/RemoveStoriSuccess.vue";
+import StoriesCardList from "@/components/stories/storiesCardList.vue";
 import TableTabs from "@/components/dashboard/TableTabs.vue";
 import PaginationTable from "@/components/dashboard/PaginationTable.vue";
 export default {
@@ -223,10 +231,6 @@ export default {
   components: {
     StoriesCardList,
     TableTabs,
-    NotifyUserSuccess,
-    NotifyUserModal,
-    RemoveStoriConfirmation,
-    RemoveStoriSuccess,
     PaginationTable,
   },
   methods: {

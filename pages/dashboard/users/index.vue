@@ -5,7 +5,7 @@
         <nuxt-link
           to="/dashboard/users/new"
           type="button"
-          class="rounded-md flex items-center gap-x-3 bg-[#0BA9B9] px-3 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="rounded-md no-underline flex items-center gap-x-3 bg-[#0BA9B9] px-3 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           <img src="@/assets/icons/dashboard/white-plus.svg" alt="" />
           Create user
@@ -13,15 +13,17 @@
       </template>
     </DashboardHeader>
     <div class="px-4 sm:px-6 lg:px-8">
-      <table-tabs />
+      <table-tabs class="mt-4" />
       <div class="flow-root bg-white rounded-md p-3 mt-6 md:mt-0">
         <div class="lg:flex justify-end items-end">
           <div class="lg:flex items-center gap-x-6 space-y-3 lg:space-y-0">
             <div class="flex items-center gap-x-10">
               <img src="@/assets/icons/dashboard/search.svg" cl alt="" />
-              <div class="flex items-center gap-x-1">
-                <h1 class="font-semibold text-gray-300">Sort by:</h1>
-                <select class="outline-none border-none text-gray-900">
+              <div class="flex items-center gap-x-3">
+                <p class="font-semibold text-sm text-gray-600 mt-3">Sort by:</p>
+                <select
+                  class="outline-none border-none text-sm bg-gray-100 py-2 px-3 rounded-md text-gray-900"
+                >
                   <option>Newest</option>
                   <option>Oldest</option>
                 </select>
@@ -148,7 +150,7 @@
                   <tr
                     class="odd:bg-gray-50"
                     v-for="(person, index) in people"
-                    :key="person.email"
+                    :key="index"
                     :class="[
                       selectedPeople.includes(person.email) && 'bg-gray-50',
                     ]"
@@ -185,23 +187,27 @@
                     >
                       <nuxt-link
                         :to="`/dashboard/users/${person.id}`"
-                        class="font-medium text-blue-600"
+                        class="font-medium text-gray-800"
                         >{{ person.username }}</nuxt-link
                       >
                     </td>
                     <td
                       class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
-                      <nuxt-link :to="`/dashboard/users/${person.id}`">{{
-                        person.fname
-                      }}</nuxt-link>
+                      <nuxt-link
+                        class="no-underline text-gray-800"
+                        :to="`/dashboard/users/${person.id}`"
+                        >{{ person.fname }}</nuxt-link
+                      >
                     </td>
                     <td
                       class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
-                      <nuxt-link :to="`/dashboard/users/${person.id}`">{{
-                        person.lname
-                      }}</nuxt-link>
+                      <nuxt-link
+                        class="no-underline text-gray-800"
+                        :to="`/dashboard/users/${person.id}`"
+                        >{{ person.lname }}</nuxt-link
+                      >
                     </td>
                     <td
                       class="whitespace-nowrap px-3 py-4 text-sm text-[#6941C6] font-semibold"
@@ -218,65 +224,56 @@
                     <td
                       class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
-                      <nuxt-link :to="`/dashboard/users/${person.id}`">{{
-                        person.phone
-                      }}</nuxt-link>
+                      <nuxt-link
+                        class="no-underline text-gray-800"
+                        :to="`/dashboard/users/${person.id}`"
+                        >{{ person.phone }}</nuxt-link
+                      >
                     </td>
                     <td
                       class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
-                      <nuxt-link :to="`/dashboard/users/${person.id}`">{{
-                        person.email
-                      }}</nuxt-link>
+                      <nuxt-link
+                        class="no-underline text-gray-800"
+                        :to="`/dashboard/users/${person.id}`"
+                        >{{ person.email }}</nuxt-link
+                      >
                     </td>
                     <td
                       class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
-                      <nuxt-link :to="`/dashboard/users/${person.id}`">{{
-                        person.stori
-                      }}</nuxt-link>
+                      <nuxt-link
+                        class="no-underline text-gray-800"
+                        :to="`/dashboard/users/${person.id}`"
+                        >{{ person.stori }}</nuxt-link
+                      >
                     </td>
                     <td
                       class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3 relative"
                     >
-                      <img
-                        @click="toggleDropdown(index)"
-                        src="@/assets/icons/dashboard/more.svg"
-                        class="cursor-pointer"
-                        alt=""
-                      />
-                      <div
-                        v-if="openDropdown === index"
-                        class="absolute right-14 top-8 mt-2 w-40 h-32 bg-white rounded-lg shadow-xl z-50 px-6 pt-6"
+                      <b-dropdown
+                        id="dropdown-1"
+                        class="m-md-2"
+                        variant="link"
+                        right
+                        toggle-class="text-decoration-none"
+                        no-caret
                       >
-                        <div
-                          class="space-y-3 flex justify-start items-start flex-col"
+                        <template #button-content>
+                          <img
+                            src="@/assets/icons/dashboard/more.svg"
+                            class="cursor-pointer"
+                            alt=""
+                          />
+                        </template>
+                        <b-dropdown-item>Edit</b-dropdown-item>
+                        <b-dropdown-item @click="removeUser(person)"
+                          >Remove User</b-dropdown-item
                         >
-                          <div>
-                            <button @click="editUser(person)">Edit</button>
-                          </div>
-                          <div>
-                            <button
-                              class="text-red-500"
-                              @click="removeUser(person)"
-                            >
-                              Remove User
-                            </button>
-                          </div>
-                          <div>
-                            <button
-                              :class="{
-                                'text-red-500': person.isActive,
-                                'text-green-500': !person.isActive,
-                              }"
-                              @click="toggleUserStatus(person)"
-                            >
-                              {{ person.isActive ? "Suspend" : "Unsuspend" }}
-                              User
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                        <b-dropdown-item @click="toggleUserStatus(person)">{{
+                          person.isActive ? "Suspend" : "Unsuspend"
+                        }}</b-dropdown-item>
+                      </b-dropdown>
                     </td>
                   </tr>
                 </tbody>
@@ -292,60 +289,226 @@
           </div>
         </div>
         <UsersCardList v-else :users="people" />
-        <!-- <div
-          v-else
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-4"
-        >
-          <div
-            v-for="person in people"
-            :key="person.email"
-            class="flex justify-center items-center flex-col gap-y-3 bg-white rounded-lg border border-gray-200 py-10"
-          >
-            <image-zoom
-              class="h-20 w-20 cursor-pointer"
-              :src="require(`@/assets/icons/dashboard/${person.avatar}.svg`)"
-            />
-            <p class="font-bold text-lg">{{ person.fname }}</p>
-            <p class="text-gray-400">{{ person.username }}</p>
-          </div>
-        </div> -->
       </div>
     </div>
-    <!-- <remove-user-confirmation-modal
-      @proceed="handleProceedRemoval"
-      @close="isConfirmingRemoveUser = false"
-      :isLoading="isConfirmingRemoveUser"
-    />
-    <remove-user-success-modal
-      @close="isRemoveUserSuccess = false"
-      @proceed="isRemoveUserSuccess = false"
-      :isLoading="isRemoveUserSuccess"
-    />
-    <activate-user-confirmation-modal
-      @close="isConfirmingActivateUser = false"
-      @proceed="handleProceedActivation"
-      :isLoading="isConfirmingActivateUser"
-    />
-    <activate-user-success-modal
-      @close="isActivateUserSuccess = false"
-      @proceed="isActivateUserSuccess = false"
-      :isLoading="isActivateUserSuccess"
-    />
-    <user-suspend-modal
-      :isLoading="isSuspendModal"
-      @close="isSuspendModal = false"
-      @proceedSuspension="isSuspendModal = false"
-    />
-    <user-suspend-confirmation
-      :isLoading="isSuspendConfirmationModal"
-      @close="isSuspendConfirmationModal = false"
-      @proceed="handleSuspendConfirmation"
-    />
-    <user-suspend-success
-      :isLoading="isSuspendSuccessModal"
-      @close="isSuspendSuccessModal = false"
-      @proceed="isSuspendSuccessModal = false"
-    /> -->
+
+    <b-modal id="removeUserConfirmation" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/danger.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Remove user</h1>
+          <p class="text-gray-500">
+            Are you sure you want to remove this user? This action cannot be
+            undone.
+          </p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('removeUserConfirmation')"
+            class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            :disabled="processingDelete || processingDelete"
+            @click="handleRemoveUser"
+            class="bg-[#D92D20] disabled:cursor-not-allowed disabled:opacity-25 text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            {{ processingDelete ? "processing..." : "Remove" }}
+          </button>
+        </div>
+      </section>
+    </b-modal>
+
+    <b-modal id="removeUserSuccess" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/success.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">User removed</h1>
+          <p class="text-gray-500">
+            You have successfully removed this user, kindly note that it cannot
+            be recovered.
+          </p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('removeUserSuccess')"
+            class="bg-[#000000] text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            Close
+          </button>
+        </div>
+      </section>
+    </b-modal>
+
+    <b-modal id="activateUserConfirmation" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/warning.svg"
+            class="h-20 2-10"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Confirm</h1>
+          <p class="text-gray-700">
+            Are you sure you want to reactivate this user?
+          </p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('activateUserConfirmation')"
+            class="text-black font-medium text-sm w-full border-gray-400 border px-3 py-2.5 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            :disabled="processingActivation"
+            @click="handleUserActivation"
+            class="bg-[#0BA9B9] w-full disabled:cursor-not-allowed disabled:opacity-25 text-sm text-white font-medium px-6 py-2.5 rounded-lg"
+          >
+            {{ processingActivation ? "processing..." : "Proceed" }}
+          </button>
+        </div>
+      </section>
+    </b-modal>
+    <b-modal id="activateUserSuccess" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/success.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Success</h1>
+          <p class="text-gray-700">User account has been reactivated</p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('activateUserSuccess')"
+            class="bg-[#0BA9B9] w-full text-sm text-white font-medium px-6 py-3 rounded-lg"
+          >
+            Continue
+          </button>
+        </div>
+      </section>
+    </b-modal>
+
+    <b-modal id="userSuspendModal" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <h1 class="font-semibold text-xl text-gray-900 py-1">Suspend</h1>
+        <div class="space-y-6">
+          <div class="space-y-2 z-0">
+            <label class="font-medium text-gray-800 text-sm"
+              >Suspension Category</label
+            >
+            <select
+              class="bg-gray-50 rounded-md w-full outline-none py-3 text-sm border-gray-300 border pl-3"
+              v-model="form.category"
+            >
+              <option value="" disabled>Select suspension category</option>
+              <option value="male">Bribery</option>
+              <option value="female">Corruption</option>
+            </select>
+          </div>
+          <div class="space-y-2 z-0">
+            <div class="font-medium text-gray-800 text-sm">Until</div>
+            <date-picker
+              style="width: 100%"
+              v-model="form.date"
+              valueType="format"
+            ></date-picker>
+          </div>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.show('userSuspendModal')"
+            type="button"
+            class="text-[#0BA9B9] text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            :disabled="!isFormEmpty"
+            @click="handleConfirmSuspension"
+            type="button"
+            class="bg-[#0BA9B9] text-sm w-full disabled:cursor-not-allowed disabled:opacity-25 text-white font-medium px-6 py-3 rounded-lg"
+          >
+            Continue
+          </button>
+        </div>
+      </section>
+    </b-modal>
+    <b-modal id="userSuspendConfirmationModal" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/warning.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Confirm</h1>
+          <p class="text-gray-700">
+            Are you sure you want to deactivate this user?
+          </p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('userSuspendConfirmationModal')"
+            class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            :disabled="processingSuspension"
+            @click="proceedToSuspendUser"
+            class="bg-[#0BA9B9] disabled:opacity-25 disabled:cursor-not-allowed text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            {{ processingSuspension ? "processing..." : "Proceed" }}
+          </button>
+        </div>
+      </section>
+    </b-modal>
+    <b-modal id="userSuspendSuccessModal" centered hide-header hide-footer>
+      <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img
+            src="@/assets/icons/success.svg"
+            class="h-20 w-20"
+            alt="warning"
+          />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">Success</h1>
+          <p class="text-gray-700">User account has been deactivated</p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button
+            @click="$bvModal.hide('userSuspendSuccessModal')"
+            class="bg-[#0BA9B9] text-sm w-full text-white font-medium px-6 py-3 rounded-lg"
+          >
+            Continue
+          </button>
+        </div>
+      </section>
+    </b-modal>
   </main>
 </template>
 
@@ -354,42 +517,25 @@ import UsersCardList from "@/components/users/UsersCardList.vue";
 import DashboardLayout from "@/layouts/dashboard.vue";
 import ImageZoom from "@/components/dashboard/ImageZoom.vue";
 import TableTabs from "@/components/dashboard/TableTabs.vue";
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
 import PaginationTable from "@/components/dashboard/PaginationTable.vue";
-import ActivateUserConfirmationModal from "@/components/modals/ActivateUserConfirmationModal.vue";
-import ActivateUserSuccessModal from "@/components/modals/ActivateUserSuccessModal.vue";
-import RemoveUserConfirmationModal from "@/components/modals/RemoveUserConfirmationModal.vue";
-import RemoveUserSuccessModal from "@/components/modals/RemoveUserSuccessModal.vue";
-import UserSuspendModal from "@/components/modals/UserSuspendModal.vue";
-import UserSuspendConfirmation from "@/components/modals/UserSuspendModal.vue";
-import UserSuspendSuccess from "@/components/modals/UserSuspendModal.vue";
 export default {
   layout: "dashboard",
   components: {
+    DatePicker,
     ImageZoom,
     UsersCardList,
     TableTabs,
     DashboardLayout,
     PaginationTable,
-    RemoveUserConfirmationModal,
-    ActivateUserConfirmationModal,
-    ActivateUserSuccessModal,
-    RemoveUserSuccessModal,
-    UserSuspendModal,
-    UserSuspendConfirmation,
-    UserSuspendSuccess,
   },
   data() {
     return {
       tableView: "list",
-      isSuspendModal: false,
-      isSuspendConfirmationModal: false,
-      isSuspendSuccessModal: false,
-      isConfirmingRemoveUser: false,
-      isConfirmSuspension: false,
-      isRemoveUserSuccess: false,
-      isConfirmingActivateUser: false,
-      isActivateUserSuccess: false,
-      openDropdown: null,
+      processingDelete: false,
+      processingActivation: false,
+      processingSuspension: false,
       currentPage: 1,
       totalPages: 10, // Replace with your total pages,
       people: [
@@ -509,12 +655,19 @@ export default {
           email: "Ann.abang@gmail.com",
           stori: "96",
           isActive: true,
-        }
+        },
       ],
       selectedPeople: [],
+      form: {
+        date: "",
+        category: "",
+      },
     };
   },
   computed: {
+    isFormEmpty() {
+      return !!(this.form.category && this.form.date);
+    },
     indeterminate() {
       return (
         this.selectedPeople.length > 0 &&
@@ -523,69 +676,56 @@ export default {
     },
   },
   methods: {
-    handleSuspendConfirmation() {
-      this.isSuspendConfirmationModal = false;
-      this.isSuspendSuccessModal = true;
-    },
-    handleFormCompletion() {
-      this.isSuspendModal = false;
-      this.isSuspendConfirmationModal = true;
-      // this.isSuspendConfirmationModal = true;
-    },
     handleTableView(itm) {
       this.tableView = itm;
     },
     updateCurrentPage(newPage) {
       this.currentPage = newPage;
     },
-    toggleDropdown(rowId) {
-      if (this.openDropdown === rowId) {
-        this.openDropdown = null;
-      } else {
-        this.openDropdown = rowId;
-      }
-    },
-    closeDropdown() {
-      this.openDropdown = null;
-    },
-    editUser(user) {
-      this.openDropdown = null;
-    },
     removeUser(user) {
-      this.isConfirmingRemoveUser = true;
-      this.openDropdown = null;
+      this.$bvModal.show("removeUserConfirmation");
     },
     toggleUserStatus(user) {
       if (user.isActive) {
-        this.isSuspendModal = true;
+        this.$bvModal.show("userSuspendModal");
       } else {
-        this.isConfirmingActivateUser = true;
+        this.$bvModal.show("activateUserConfirmation");
       }
       this.openDropdown = null;
-    },
-    handleProceedRemoval() {
-      this.isConfirmingRemoveUser = false;
-      this.isRemoveUserSuccess = true;
-    },
-    handleProceedActivation() {
-      this.isConfirmingActivateUser = false;
-      this.isActivateUserSuccess = true;
     },
     handleSearch(val) {
       console.log(val, "search val here from users");
     },
+    handleRemoveUser() {
+      this.processingDelete = true;
+      setTimeout(() => {
+        this.$bvModal.hide("removeUserConfirmation");
+        this.$bvModal.show("removeUserSuccess");
+        this.processingDelete = false;
+      }, 3000);
+    },
+    handleUserActivation() {
+      this.processingActivation = true;
+      setTimeout(() => {
+        this.$bvModal.hide("activateUserConfirmation");
+        this.$bvModal.show("activateUserSuccess");
+        this.processingActivation = false;
+      }, 3000);
+    },
+    proceedToSuspendUser() {
+      this.$bvModal.hide("userSuspendModal");
+      this.$bvModal.show("userSuspendConfirmationModal");
+      this.processingSuspension = true;
+      setTimeout(() => {
+        this.$bvModal.hide("userSuspendConfirmationModal");
+        this.$bvModal.show("userSuspendSuccessModal");
+        this.processingSuspension = false;
+      }, 3000);
+    },
+    handleConfirmSuspension() {
+      this.$bvModal.hide("userSuspendModal");
+      this.$bvModal.show("userSuspendConfirmationModal");
+    },
   },
-  // mounted() {
-  //   document.addEventListener("click", (e) => {
-  //     console.log("you clicked outside", this.$el);
-  //     // Check if click is outside the dropdown
-  //     if (!this.$el.contains(e.target)) {
-  //       this.closeDropdown();
-  //     }
-  //   });
-  // },
-  // beforeDestroy() {
-  //   document.removeEventListener("click", this.closeDropdown);
-  // },
 };
 </script>

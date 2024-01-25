@@ -1,7 +1,7 @@
 <template>
   <div class="lg:flex gap-x-10 space-y-10 lg:space-y-0">
     <div class="lg:w-6/12 rounded-2xl bg-white p-6 shadow-md border space-y-6">
-      <div
+      <!-- <div
         class="flex w-full justify-between md:justify-start md:items-start items-center md:flex-col flex-row md:space-y-6"
       >
         <h1 class="font-medium text-sm md:text-lg dark:text-white">Most Recent</h1>
@@ -30,7 +30,7 @@
                       ? 'border-sky-500 border-b-2 font-bold text-gray-900 dark:text-white'
                       : 'border-transparent',
                   ]"
-                  class="shrink-0 border-b-2 px-1 pb-4 text-sm text-gray-400"
+                  class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
                   aria-current="page"
                 >
                   Reserved Username
@@ -43,7 +43,7 @@
                       ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
                       : 'border-transparent',
                   ]"
-                  class="shrink-0 border-b-2 px-1 pb-4 text-sm text-gray-400"
+                  class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
                 >
                   Reported users
                 </button>
@@ -55,7 +55,7 @@
                       ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
                       : 'border-transparent',
                   ]"
-                  class="shrink-0 border-b-2 px-1 pb-4 text-sm text-gray-400"
+                  class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
                 >
                   Reported post
                 </button>
@@ -67,7 +67,7 @@
                       ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
                       : 'border-transparent',
                   ]"
-                  class="shrink-0 border-b-2 px-1 pb-4 text-sm text-gray-400"
+                  class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
                 >
                   Reported comment
                 </button>
@@ -75,7 +75,82 @@
             </div>
           </div>
         </div>
+      </div> -->
+      <div
+      class="space-y-2"
+    >
+      <h1 class="font-medium text-sm md:text-lg dark:text-white">Most Recent</h1>
+      <div>
+        <div class="sm:hidden">
+          <label for="Tab" class="sr-only">Tab</label>
+
+          <select
+            id="Tab"
+            class="md:w-full text-xs rounded-md py-2.5 md:py-0 px-3 outline-none md:text-sm md:px-0 bg-gray-300 border-gray-200"
+          >
+            <option select>Reserved Username</option>
+            <option>Reported users</option>
+            <option>Reported post</option>
+            <option>Reported comment</option>
+          </select>
+        </div>
+
+        <div class="hidden sm:block">
+          <div class="border-b border-gray-200">
+            <nav class="-mb-px flex gap-6" aria-label="Tabs">
+              <button
+                @click="setActiveTable('reserved_usernames')"
+                :class="[
+                  activeTable === 'reserved_usernames'
+                    ? 'border-sky-500 border-b-2 font-bold text-gray-900 dark:text-white'
+                    : 'border-transparent',
+                ]"
+                class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
+                aria-current="page"
+              >
+                Reserved Username
+              </button>
+
+              <button
+                @click="setActiveTable('reported_users')"
+                :class="[
+                  activeTable === 'reported_users'
+                    ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
+                    : 'border-transparent',
+                ]"
+                class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
+              >
+                Reported users
+              </button>
+
+              <button
+                @click="setActiveTable('reported_post')"
+                :class="[
+                  activeTable === 'reported_post'
+                    ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
+                    : 'border-transparent',
+                ]"
+                class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
+              >
+                Reported post
+              </button>
+
+              <button
+                @click="setActiveTable('reported_comment')"
+                :class="[
+                  activeTable === 'reported_comment'
+                    ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
+                    : 'border-transparent',
+                ]"
+                class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
+              >
+                Reported comment
+              </button>
+            </nav>
+          </div>
+        </div>
       </div>
+    </div>
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
           <tbody class="divide-y divide-gray-200">

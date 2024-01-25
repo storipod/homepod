@@ -1,16 +1,6 @@
 <template>
   <main>
-    <DashboardHeader>
-      <!-- <template v-slot:action>
-        <nuxt-link
-          to="/dashboard/users/create-notification"
-          type="button"
-          class="rounded-md flex items-center gap-x-3 bg-[#0BA9B9] px-6 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          New
-        </nuxt-link>
-      </template> -->
-    </DashboardHeader>
+    <DashboardHeader> </DashboardHeader>
     <div class="mx-6 mt-6">
       <section class="bg-white p-6 lg:p-10 space-y-6">
         <div
@@ -26,6 +16,7 @@
             <label class="text-sm font-medium">Title</label>
             <input
               v-model="form.title"
+              placeholder="Enter notification title"
               class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
               type="text"
             />
@@ -48,6 +39,7 @@
               v-model="form.recieverGroup"
               class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
             >
+              <option disabled value="">select an option</option>
               <option value="all">All users</option>
               <option value="selected">Selected users</option>
             </select>
@@ -78,38 +70,98 @@
         </form>
       </section>
       <div>
-        <notification-confirmation
+        <b-modal
+          id="notificationConfirmationModal"
+          title="BootstrapVue"
           class="z-50"
-          :isLoading="showConfirmationModal"
-          @close="showConfirmationModal = false"
-          @proceed="handleProceedNotification"
-          :userType="
-            form.recieverGroup === 'all' ? 'ALL USERS' : 'SELECTED USERS'
-          "
-        />
-        <notification-success
+          hide-header
+          hide-footer
+        >
+          <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+            <div>
+              <img src="@/assets/icons/warning.svg" alt="warning" />
+            </div>
+            <div class="space-y-1">
+              <h1 class="font-semibold text-gray-950 text-xl">Confirmation</h1>
+              <p class="font-medium text-gray-500">
+                You are about to send a message to
+                <span class="font-bold text-gray-900">{{ userType }}</span>
+              </p>
+            </div>
+            <div>
+              <label
+                class="font-medium text-gray-500 flex items-center gap-x-3"
+              >
+                <input type="checkbox" v-model="isAgreed" :checked="isAgreed" />
+                This message adheres to Shuttler’s content policy</label
+              >
+            </div>
+            <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+              <button
+                @click="$bvModal.hide('notificationConfirmationModal')"
+                class="text-black font-medium text-sm w-full border-gray-400 border px-3 py-3 rounded-lg"
+              >
+                Cancel
+              </button>
+              <button
+                :disabled="!isAgreed || processing"
+                @click="sendNotification"
+                class="bg-[#0BA9B9] w-full text-sm disabled:cursor-not-allowed disabled:opacity-25 text-white font-medium px-6 py-3 rounded-lg"
+              >
+                Continue
+              </button>
+            </div>
+          </section>
+        </b-modal>
+
+        <b-modal
+          id="notificationSuccessModal"
           class="z-50"
-          @close="showSuccessModal = false"
-          @proceed="showSuccessModal = false"
-          :isLoading="showSuccessModal"
-        />
+          hide-header
+          hide-footer
+        >
+          <section class="bg-white p-6 space-y-4 max-w-screen-lg rounded-md">
+            <div>
+              <img src="@/assets/icons/success.svg" alt="warning" />
+            </div>
+            <div>
+              <h1 class="font-semibold text-xl">Success</h1>
+            </div>
+            <div>
+              <p class="font-medium text-gray-500">Message has been sent.</p>
+            </div>
+            <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+              <button
+                @click="$bvModal.hide('notificationSuccessModal')"
+                class="text-black font-medium text-sm w-full border-gray-400 border px-3 py-3 rounded-lg"
+              >
+                Create another
+              </button>
+              <button
+                @click="$router.push('/dashboard/users/notify')"
+                class="bg-[#0BA9B9] w-full text-sm text-white font-medium px-6 py-3 rounded-lg"
+              >
+                {{ processing ? "Loading.." : "Continue" }}
+              </button>
+            </div>
+          </section>
+        </b-modal>
       </div>
     </div>
   </main>
 </template>
 
 <script>
-import NotificationConfirmation from "@/components/modals/NotificationConfirmation.vue";
-import NotificationSuccess from "@/components/modals/NotificationSuccess.vue";
 export default {
   layout: "dashboard",
-  components: {
-    NotificationConfirmation,
-    NotificationSuccess,
-  },
   data() {
     return {
       value: "",
+      isAgreed: false,
+      processing: false,
+      info: "My Default Content",
+      content:
+        "<p>A Vue.js wrapper component for tiptap to use <code>v-model</code>.</p>",
       showConfirmationModal: false,
       showSuccessModal: false,
       markdownOption: {
@@ -121,31 +173,10 @@ export default {
         mark: true,
         superscript: true,
         subscript: true,
-        // quote: true,
-        // ol: true,
-        // ul: true,
-        // link: true,
-        // imagelink: true,
-        // code: true,
-        // table: true,
-        // fullscreen: true,
-        // readmodel: true,
-        // htmlcode: true,
-        // help: true,
-        // undo: true,
-        // redo: true,
-        // trash: true,
-        // save: true,
-        // navigation: true,
-        // alignleft: true,
-        // aligncenter: true,
-        // alignright: true,
-        // subfield: true,
-        // preview: true,
       },
       form: {
         title: "",
-        content: "",
+        content: "hello",
         recieverGroup: "",
         isFlashMessage: false,
       },
@@ -174,11 +205,19 @@ export default {
       this.form.isFlashMessage = false;
     },
     handleUserNotification() {
-      this.showConfirmationModal = true;
+      this.$bvModal.show("notificationConfirmationModal");
     },
     handleProceedNotifications() {
       this.showConfirmationModal = false;
       this.showSuccessModal = true;
+    },
+    sendNotification() {
+      this.processing = true;
+      setTimeout(() => {
+        this.processing = false;
+        this.$bvModal.hide("notificationConfirmationModal");
+        this.$bvModal.show("notificationSuccessModal");
+      }, 2000);
     },
   },
   computed: {
@@ -189,14 +228,17 @@ export default {
         this.form.recieverGroup
       );
     },
+    userType() {
+      return this.form.recieverGroup === "all" ? "ALL USERS" : "SELECTED USERS";
+    },
   },
 };
 </script>
 
 <style scoped>
 .mavonEditor {
+  z-index: 0;
   width: 100%;
   height: 100%;
-  z-index: -9999999;
 }
 </style>
