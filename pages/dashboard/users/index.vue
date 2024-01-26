@@ -426,8 +426,19 @@
               <option value="female">Corruption</option>
             </select>
           </div>
-          <div class="space-y-2 z-0">
-            <div class="font-medium text-gray-800 text-sm">Until</div>
+          <div>
+            <label for="Indefinately">
+              <input
+                v-model="form.indefinately"
+                name="Indefinately"
+                id="Indefinately"
+                type="checkbox"
+              />
+              Indefinitely
+            </label>
+          </div>
+          <div class="space-y-2 z-0" v-if="!form.indefinately">
+            <div class="font-medium text-gray-800 text-sm">Until:</div>
             <date-picker
               style="width: 100%"
               v-model="form.date"
@@ -661,12 +672,16 @@ export default {
       form: {
         date: "",
         category: "",
+        indefinately: true,
       },
     };
   },
   computed: {
     isFormEmpty() {
-      return !!(this.form.category && this.form.date);
+      return !!(
+        this.form.category &&
+        (this.form.indefinately || this.form.date)
+      );
     },
     indeterminate() {
       return (

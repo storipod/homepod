@@ -16,7 +16,7 @@
           <nuxt-link
             v-for="itm in children"
             :key="itm.title"
-            class="flex w-full items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose text-black dark:text-white"
+            class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose"
             :to="itm.urlPath"
             ><img
               :src="require(`@/assets/icons/dashboard/${itm.icon}.svg`)"
