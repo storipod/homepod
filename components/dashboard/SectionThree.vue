@@ -2,7 +2,7 @@
   <div class="lg:flex gap-x-10 space-y-10 lg:space-y-0">
     <div class="lg:w-6/12 rounded-2xl bg-white p-6 shadow-md border space-y-6">
       <div class="space-y-2">
-        <h1 class="font-semibold text-sm md:text-lg dark:text-white">
+        <h1 class="font-semibold text-sm md:text-lg">
           Most Recent
         </h1>
         <div>
@@ -27,7 +27,7 @@
                   @click="setActiveTable('reserved_usernames')"
                   :class="[
                     activeTable === 'reserved_usernames'
-                      ? 'border-sky-500 border-b-2 font-bold text-gray-900 dark:text-white'
+                      ? 'border-sky-500 border-b-2 font-bold text-gray-900'
                       : 'border-transparent',
                   ]"
                   class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
@@ -40,7 +40,7 @@
                   @click="setActiveTable('reported_users')"
                   :class="[
                     activeTable === 'reported_users'
-                      ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
+                      ? 'border-sky-500 font-bold text-gray-900'
                       : 'border-transparent',
                   ]"
                   class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
@@ -52,7 +52,7 @@
                   @click="setActiveTable('reported_post')"
                   :class="[
                     activeTable === 'reported_post'
-                      ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
+                      ? 'border-sky-500 font-bold text-gray-900'
                       : 'border-transparent',
                   ]"
                   class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
@@ -64,7 +64,7 @@
                   @click="setActiveTable('reported_comment')"
                   :class="[
                     activeTable === 'reported_comment'
-                      ? 'border-sky-500 font-bold text-gray-900 dark:text-white'
+                      ? 'border-sky-500 font-bold text-gray-900'
                       : 'border-transparent',
                   ]"
                   class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400"
@@ -92,21 +92,21 @@
                 </nuxt-link>
               </td>
               <td
-                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700 dark:text-white"
+                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700"
               >
                 <nuxt-link class="text-blue-700 no-underline hover:underline" :to="`/dashboard/users/${itm.id}`">{{
                   itm.name
                 }}</nuxt-link>
               </td>
               <td
-                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700 dark:text-white"
+                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700"
               >
                 <nuxt-link class="text-blue-700 no-underline hover:underline" :to="`/dashboard/users/${itm.id}}}`">{{
                   itm.email
                 }}</nuxt-link>
               </td>
               <td
-                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700 dark:text-white"
+                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700"
               >
                 <nuxt-link class="text-blue-700 no-underline hover:underline" :to="`/dashboard/users/${itm.id}}}`">
                   <img src="@/assets/icons/arrow-right.svg" alt="" />
@@ -122,10 +122,10 @@
         class="md:flex space-y-6 md:space-y-0 items-center justify-between px-3 md:px-7 py-4"
       >
         <div class="">
-          <h1 class="font-medium text-lg text-gray-900 py-0 my-0 dark:text-white">
+          <h1 class="font-medium text-lg text-gray-900 py-0 my-0">
             Website Traffic
           </h1>
-          <p class="text-gray-400 dark:text-white py-0 my-0 text-sm md:text-base">
+          <p class="text-gray-400 py-0 my-0 text-sm md:text-base">
             Comparison of source of website traffic
           </p>
         </div>

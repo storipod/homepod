@@ -1,11 +1,11 @@
 <template>
   <div
-    class="md:flex justify-start items-start space-y-10 md:space-y-0 gap-x-10 w-full dark:bg-black"
+    class="md:flex justify-start items-start space-y-10 md:space-y-0 gap-x-10 w-full"
   >
     <!-- <test-chart /> -->
     <div class="lg:w-9/12 md:w-6/12"><ActivitiesChart /></div>
     <div
-      class="lg:w-3/12 md:w-6/12 rounded-lg bg-white shadow-md space-y-6 dark:border dark:border-white"
+      class="lg:w-3/12 md:w-6/12 rounded-lg bg-white shadow-md space-y-6"
     >
       <div class="flex items-center justify-between px-7 py-4">
         <h6 class="font-medium text-gray-500">App Store information</h6>
@@ -23,7 +23,7 @@
             <img src="@/assets/icons/dashboard/android-badge.svg" alt="" />
             <div class="space-y-4">
               <div class="flex items-center space-x-4">
-                <h2 class="font-bold text-3xl dark:text-white">625</h2>
+                <h2 class="font-bold text-3xl">625</h2>
                 <img
                   src="@/assets/icons/dashboard/increase.svg"
                   alt=""
@@ -32,7 +32,7 @@
               </div>
               <p class="text-gray-400">Downloads</p>
               <div class="flex items-center gap-x-3">
-                <p class="dark:text-white mt-3">4.5</p>
+                <p class="mt-3">4.5</p>
                 <div>
                   <img
                     src="@/assets/icons/dashboard/star-group.svg"
@@ -51,12 +51,12 @@
           <img src="@/assets/icons/dashboard/ios-badge.svg" alt="" />
           <div class="space-y-4">
             <div class="flex items-center space-x-4">
-              <h2 class="font-bold text-3xl dark:text-white">902</h2>
+              <h2 class="font-bold text-3xl">902</h2>
               <img src="@/assets/icons/dashboard/decrease.svg" alt="" />
             </div>
             <p class="text-gray-400">Downloads</p>
             <div class="flex items-center gap-x-3">
-              <p class="dark:text-white mt-3">4.8</p>
+              <p class="mt-3">4.8</p>
               <img src="@/assets/icons/dashboard/star-group.svg" alt="" />
             </div>
           </div>

@@ -1,11 +1,16 @@
 <template>
   <div>
+    <LoadingSpinner />
     <Nuxt />
   </div>
 </template>
 
 <script>
+import LoadingSpinner from "@/components/LandingPageLoader.vue";
 export default {
+  components: {
+    LoadingSpinner,
+  },
   mounted() {
     if (!this.$store.state?.auth?.auth?.isLoggedIn) {
       const newQuery = { page: "login" };

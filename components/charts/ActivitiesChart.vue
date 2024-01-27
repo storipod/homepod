@@ -1,10 +1,10 @@
 <template>
   <div
-    class="bg-white dark:bg-black shadow rounded-md p-6 md:p-10 space-y-3 dark:border dark:border-white"
+    class="bg-white shadow rounded-md p-6 md:p-10 space-y-3 dark:border dark:border-white"
   >
     <div class="md:flex space-y-4 md:space-y-0 justify-between items-center">
       <p
-        class="text-[#ACAFAE] text-sm md:text-lg font-light dark:text-white"
+        class="text-[#ACAFAE] text-sm md:text-lg font-light"
       >
         Live traffic of logged in Active users
       </p>
@@ -37,7 +37,7 @@
         <apexchart
           class="md:w-full overflow-x-auto"
           width="1000"
-          height="300"
+          height="330"
           type="bar"
           :options="chartOptions"
           :series="series"

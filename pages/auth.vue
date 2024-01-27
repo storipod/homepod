@@ -17,7 +17,7 @@
           @redirectLogin="navigateToLogin"
         />
       </div>
-      <div class="lg:w-6/12 hidden lg:block h-screen">
+      <div v-if="$route.query.page === 'login' || $route.query.page === 'forgot' || $route.query.page === 'success'" class="lg:w-6/12 hidden lg:block h-screen">
         <section
           class="relative hidden h-32 items-center justify-center bg-[#EBFFFF] lg:col-span-5 lg:flex lg:h-full xl:col-span-6"
         >

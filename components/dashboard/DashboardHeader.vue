@@ -5,7 +5,7 @@
         class="md:flex space-y-6 md:space-y-0 items-center border-b hidden"
       >
         <div class="xl:w-2/12">
-          <h6 class="font-medium dark:text-white text-sm">
+          <h6 class="font-medium text-sm md:text-lg">
             Welcome James! 😊
           </h6>
         </div>
@@ -27,19 +27,18 @@
             <div class="flex justify-between items-center gap-x-4">
               <div>
                 <img
-                  v-if="!isDarkMode"
                   @click="toggleDarkMode"
                   src="@/assets/icons/dashboard/moon.svg"
                   alt=""
                   class="cursor-pointer h-8 w-8"
                 />
-                <img
+                <!-- <img
                   v-if="isDarkMode"
                   @click="toggleDarkMode"
                   src="@/assets/icons/dashboard/light-moon.svg"
                   alt=""
                   class="cursor-pointer h-8 w-8"
-                />
+                /> -->
               </div>
               <div>
                 <img

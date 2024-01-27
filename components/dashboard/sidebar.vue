@@ -3,8 +3,8 @@
     class="w-full p-6 relative flex flex-col h-screen dark:border-r dark:border-white"
   >
     <div class="flex-grow">
-      <img src="@/assets/icons/homepod-black.svg" alt="" class="dark:hidden" />
-      <img src="@/assets/img/mobileLogo.png" alt="" class="hidden" />
+      <img src="@/assets/icons/homepod-black.svg" alt=""  />
+      <!-- <img src="@/assets/img/mobileLogo.png" alt="" /> -->
       <div v-for="({ header, children }, idx) in sidebarItems" :key="idx">
         <h2
           :class="[header ? 'border-b-[0.2px] border-gray-300' : '']"

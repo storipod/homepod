@@ -4,7 +4,7 @@
       <DashboardSidebar />
     </div>
     <div class="w-9.5/12 w-full flex-grow">
-      <div class="bg-gray-100 dark:bg-black md:h-screen overflow-y-auto">
+      <div class="bg-gray-100  md:h-screen overflow-y-auto">
         <Nuxt class="" />
       </div>
     </div>
