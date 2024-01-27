@@ -8,7 +8,7 @@
     </div>
     <div v-else class="bg-white rounded-lg m-6 mx-10 p-6 space-y-6">
       <div class="flex justify-between items-center">
-        <h1 class="text-2xl font-semibold">Search Result “{{ search }}”</h1>
+        <h3 class="text-2xl font-semibold">Search Result “{{ search }}”</h3>
         <div class="flex items-center gap-x-3">
           <p class="text-gray-600">Show results from:</p>
           <select class="outline-none px-6 py-2 bg-gray-100 rounded-lg text-sm">
@@ -25,12 +25,12 @@
       </div>
       <div class="space-y-6">
         <div class="border-t border-gray-300 space-y-4 py-6">
-          <h1 class="font-semibold text-gray-800">User</h1>
+          <h6 class="font-semibold text-gray-800">User</h6>
           <div class="flex">
-            <UsersCardList class="w-10/12" :users="filteredUsers.slice(0, 5)" />
+            <UsersCardList class="w-10/12 py-0 my-0" :users="filteredUsers.slice(0, 5)" />
             <div
               @click="$router.push('/dashboard/users')"
-              class="w-2/12 cursor-pointer bg-white shadow h-60 rounded-lg border-gray-400 border-2 border-dashed mt-4 flex justify-center items-center"
+              class="w-2/12 cursor-pointer bg-white shadow h-[270px] rounded-lg border-gray-400 border-2 border-dashed mt-4 flex justify-center items-center"
             >
               <div class="flex justify-center items-center flex-col gap-y-4">
                 <p
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="border-t border-gray-300 space-y-4 py-6">
-          <h1 class="font-semibold text-gray-800">Stories</h1>
+          <h6 class="font-semibold text-gray-800">Stories</h6>
           <div class="flex gap-x-6">
             <StoriesCardList
               class="w-full"
@@ -52,7 +52,7 @@
             />
             <div
               @click="$router.push('/dashboard/stories')"
-              class="w-2/12 cursor-pointer bg-white shadow h-72 rounded-lg border-gray-400 border-2 border-dashed mt-1 flex justify-center items-center"
+              class="w-2/12 cursor-pointer bg-white shadow h-[340px] rounded-lg border-gray-400 border-2 border-dashed mt-1 flex justify-center items-center"
             >
               <div class="flex justify-center items-center flex-col gap-y-4">
                 <p

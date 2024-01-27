@@ -14,7 +14,6 @@
           >({{ itm.subTitle }})</span
         >
       </div>
-      <!-- <img :src="require(`@/assets/icons/dashboard/${itm.chart}.svg`)" alt="" /> -->
       <div class="flex items-center flex-col gap-x-4 lg:gap-x-6 mt-3">
         <h1 class="text-2xl lg:text-3xl font-bold">{{ itm.count }}</h1>
         <div class="flex items-center gap-x-2">
@@ -28,7 +27,7 @@
             src="@/assets/icons/dashboard/decrease.svg"
             alt=""
           />
-          <p :class="[itm.progress ? 'text-green-600' : 'text-red-600']">
+          <p class="pt-3" :class="[itm.progress ? 'text-green-600' : 'text-red-600']">
             {{ itm.rate }}
           </p>
         </div>
@@ -60,17 +59,17 @@ export default {
           rate: "+2.4%",
           progress: true,
           bg: "bg-[#ECFCFE]",
-          subTitle: "Total",
+          subTitle: "",
           chart: "signup-spiral",
         },
         {
-          title: "Stori",
+          title: "Stories",
           count: "180,000",
           desc: "Compared from Last Month",
           rate: "-9.7%",
           progress: false,
           bg: "bg-[#FFF8E3]",
-          subTitle: "Total",
+          subTitle: "",
           chart: "stori-spiral",
         },
         {
@@ -80,7 +79,7 @@ export default {
           rate: "+12%",
           progress: true,
           bg: "bg-[#f9efff]",
-          subTitle: "Total",
+          subTitle: "",
           chart: "engagement-spiral",
         },
       ],

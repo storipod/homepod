@@ -1,10 +1,10 @@
 <template>
   <div class="flex justify-center items-center w-full lg:ml-6">
     <div
-      class="lg:flex space-y-4 lg;space-y-0 items-center w-full justify-between lg:px-6 py-4 bg-gray-50"
+      class="lg:flex space-y-4 lg;space-y-0 items-center w-full justify-between lg:px-6 py-2 bg-gray-50"
     >
       <div>
-        <p class="font-semibold text-gray-500">Viewing Products 1 - 8 of 22</p>
+        <p class="font-semibold text-gray-500 text-sm">Viewing Products 1 - 8 of 22</p>
       </div>
       <div class="flex items-center justify-center space-x-1 overflow-x-auto">
         <button

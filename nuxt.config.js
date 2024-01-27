@@ -32,7 +32,8 @@ export default {
     { src: "@/plugins/v-select.js", ssr: false },
     { src: "@/plugins/mavon-editor", ssr: false },
     { src: "~/plugins/apexcharts", ssr: false },
-    '~/plugins/bootstrap-vue.client'
+    '~/plugins/bootstrap-vue.client',
+    // { src: '@/plugins/vuex-persist', client: true }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

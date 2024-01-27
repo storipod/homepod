@@ -1,9 +1,17 @@
 <template>
   <div>
-    <div class="chart-wrapper md:w-full overflow-x-auto">
+    <div class="chart-wrapper w-full overflow-x-auto">
       <client-only>
         <apexchart
-          class="md:w-full overflow-x-auto"
+          class="md:w-full md:hidden overflow-x-auto"
+          width="500"
+          height="242"
+          type="pie"
+          :options="chartOptions"
+          :series="series"
+        ></apexchart>
+        <apexchart
+          class="md:w-full hidden md:block overflow-x-auto"
           width="500"
           type="pie"
           :options="chartOptions"
@@ -24,6 +32,21 @@ export default {
         dataLabels: {
           enabled: true,
         },
+        legend: {
+          show: true,
+          showForSingleSeries: false,
+          showForNullSeries: true,
+          showForZeroSeries: true,
+          position: "bottom",
+          horizontalAlign: "center",
+          fontSize: "16px",
+          fontFamily: "Helvetica, Arial",
+          fontWeight: 500,
+          itemMargin: {
+            horizontal: 15,
+            vertical: 0,
+          },
+        },
         fill: {
           colors: ["#BDBDBD", "#000000"],
         },
@@ -36,7 +59,7 @@ export default {
                 width: 200,
               },
               legend: {
-                position: "bottom",
+                position: "center",
                 show: false,
               },
             },
@@ -51,6 +74,7 @@ export default {
 <style scoped>
 div.chart-wrapper {
   width: "100%";
+  height: "100%";
   display: flex;
   align-items: center;
   justify-content: flex-start;

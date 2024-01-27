@@ -43,7 +43,6 @@
               </div>
               <div>
                 <img
-                  @click="$router.push('/dashboard/users/notify')"
                   src="@/assets/icons/dashboard/bell.svg"
                   alt=""
                   class="cursor-pointer h-8 w-8"

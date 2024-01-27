@@ -110,11 +110,8 @@ export default {
       this.$emit("processAdminLogin", this.processing);
       setTimeout(() => {
         this.processing = false;
-        this.$store.dispatch("loginUser", {
-          username: "Marquis",
-          token: "testing",
-          isLoggedIn: true
-        });
+        const user = { name: "John Doe", email: "john@example.com" };
+        this.$store.dispatch("auth/login", user);
         this.$router.push("/dashboard");
       }, 4000);
     },

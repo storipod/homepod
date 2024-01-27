@@ -74,6 +74,11 @@ export default {
               icon: "stories",
             },
             {
+              urlPath: "/dashboard/notify",
+              title: "Notify",
+              icon: "bell",
+            },
+            {
               urlPath: "/dashboard/ad-service",
               title: "Ad Service",
               icon: "ad",

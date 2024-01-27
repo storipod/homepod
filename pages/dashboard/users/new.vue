@@ -2,12 +2,12 @@
   <main>
     <DashboardHeader />
     <div class="mx-3 md:mx-6 py-6">
-      <div class="space-y-8 bg-white p-4 lg:px-20 py-10 rounded-2xl">
+      <div class="space-y-8 bg-white px-4 md:px-20 py-10 rounded-2xl">
         <div class="space-y-3">
           <p class="text-gray-900 font-semibold">Profile image</p>
           <div>
             <label class="">
-              <image-zoom
+              <img
                 v-if="form.imageSrc"
                 :src="form.imageSrc"
                 alt=""
@@ -28,7 +28,7 @@
           class="lg:flex space-y-3 lg:space-y-0 justify-between items-center gap-x-10"
         >
           <div class="w-full space-y-1">
-            <label class="text-sm font-medium">First name</label>
+            <label class="text-xs md:text-sm font-medium">First name</label>
             <input
               v-model="form.fname"
               class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
@@ -36,7 +36,7 @@
             />
           </div>
           <div class="w-full space-y-1">
-            <label class="text-sm font-medium">Last name</label>
+            <label class="text-xs md:text-sm font-medium">Last name</label>
             <input
               v-model="form.lname"
               class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
@@ -48,7 +48,7 @@
           class="lg:flex space-y-3 lg:space-y-0 justify-between items-center gap-x-10"
         >
           <div class="w-full space-y-1">
-            <label class="text-sm font-medium">Phone no.</label>
+            <label class="text-xs md:text-sm font-medium">Phone no.</label>
             <input
               v-model="form.phone"
               type="tel"
@@ -68,7 +68,7 @@
           class="lg:flex space-y-3 lg:space-y-0 justify-between items-center gap-x-10"
         >
           <div class="w-full space-y-1 relative">
-            <label class="text-sm font-medium">Password</label>
+            <label class="text-xs md:text-sm font-medium">Password</label>
             <!-- <input
         type="text"
         class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border"
@@ -89,7 +89,7 @@
             />
           </div>
           <div class="w-full space-y-1 relative">
-            <label class="text-sm font-medium">Re-enter password</label>
+            <label class="text-xs md:text-sm font-medium">Re-enter password</label>
             <input
               id="password"
               :type="showPassword ? 'text' : 'password'"
@@ -110,7 +110,7 @@
           class="lg:flex space-y-3 lg:space-y-0 justify-between items-center gap-x-10"
         >
           <div class="w-full space-y-1">
-            <label class="text-sm font-medium">Gender </label>
+            <label class="text-xs md:text-sm font-medium">Gender </label>
             <select
               class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
               v-model="form.gender"
@@ -121,7 +121,7 @@
             </select>
           </div>
           <div class="w-full space-y-1">
-            <label class="text-sm font-medium">Date of Birth</label>
+            <label class="text-xs md:text-sm font-medium">Date of Birth</label>
             <input
               type="date"
               v-model="form.dob"

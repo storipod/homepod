@@ -23,32 +23,31 @@
         >
           <div class="absolute right-10 top-4 flex items-end justify-end">
             <div class="flex items-center gap-x-10">
-              <nuxt-link class="no-underline text-gray-800" to="/">Terms</nuxt-link>
-              <nuxt-link class="no-underline text-gray-800" to="/">Privacy</nuxt-link>
+              <nuxt-link class="no-underline text-gray-800" to="#">Terms</nuxt-link>
+              <nuxt-link class="no-underline text-gray-800" to="#">Privacy</nuxt-link>
             </div>
           </div>
           <div class="flex flex-col items-center justify-center">
             <p
               v-if="$route.query.page === 'login'"
-              class="text-lg font-medium leading-loose tracking-wider"
+              class="text-lg font-medium leading-loose tracking-wider py-0 my-0"
             >
               “Transforming data into actionable insights.”
             </p>
-            <div class="">
+            <!-- <div class=""> -->
               <img
                 alt="Login Animated Image"
                 src="@/assets/icons/animated-login.svg"
                 class="object-cover object-center"
               />
-            </div>
+            <!-- </div> -->
             <div v-if="$route.query.page === 'login'" class="">
               <h2
                 class="mt-6 text-center text-2xl font-bold sm:text-3xl md:text-xl"
               >
                 Read. Write . Create
               </h2>
-
-              <p class="mt-4 text-center leading-relaxed text-[#737876]">
+              <p class="mt-0 text-center leading-relaxed text-[#737876]">
                 Homepod Tells us about Storipod and Storipod is feeling
               </p>
             </div>

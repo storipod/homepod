@@ -32,8 +32,14 @@
               </div>
               <p class="text-gray-400">Downloads</p>
               <div class="flex items-center gap-x-3">
-                <p class="dark:text-white">4.5</p>
-                <img src="@/assets/icons/dashboard/star-group.svg" alt="" />
+                <p class="dark:text-white mt-3">4.5</p>
+                <div>
+                  <img
+                    src="@/assets/icons/dashboard/star-group.svg"
+                    class=""
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
             <div>
@@ -50,7 +56,7 @@
             </div>
             <p class="text-gray-400">Downloads</p>
             <div class="flex items-center gap-x-3">
-              <p class="dark:text-white">4.8</p>
+              <p class="dark:text-white mt-3">4.8</p>
               <img src="@/assets/icons/dashboard/star-group.svg" alt="" />
             </div>
           </div>

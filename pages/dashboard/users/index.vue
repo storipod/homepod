@@ -92,7 +92,7 @@
                     </th>
                     <th
                       scope="col"
-                      class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                      class="py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
                       Avatar
                     </th>
@@ -128,19 +128,19 @@
                     </th>
                     <th
                       scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                     >
                       Email
                     </th>
                     <th
                       scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                     >
                       No. of Stori(s)
                     </th>
                     <th
                       scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                     >
                       Actions
                     </th>
@@ -187,7 +187,7 @@
                     >
                       <nuxt-link
                         :to="`/dashboard/users/${person.id}`"
-                        class="font-medium text-gray-800"
+                        class="font-medium text-gray-800 no-underline"
                         >{{ person.username }}</nuxt-link
                       >
                     </td>
@@ -231,7 +231,7 @@
                       >
                     </td>
                     <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                      class="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500"
                     >
                       <nuxt-link
                         class="no-underline text-gray-800"
@@ -240,7 +240,7 @@
                       >
                     </td>
                     <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                      class="whitespace-nowrap px-3 text-center py-4 text-sm text-gray-500"
                     >
                       <nuxt-link
                         class="no-underline text-gray-800"

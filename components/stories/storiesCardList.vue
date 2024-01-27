@@ -45,7 +45,7 @@
           <img src="@/assets/icons/stori-eclipse.svg" alt="" />
         </div>
         <div class="border-t border-gray-300 flex justify-end items-end">
-          <p class="text-gray-400 text-sm font-medium px-4 py-4">
+          <p class="text-gray-400 text-sm font-medium px-4 pt-3">
             {{ itm.date }}
           </p>
         </div>
