@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[33],{521:function(n,t,o){"use strict";o.r(t);var e={},l=o(23),component=Object(l.a)(e,(function(){return(0,this._self._c)("h1",[this._v("Storipod admin")])}),[],!1,null,null,null);t.default=component.exports}}]);

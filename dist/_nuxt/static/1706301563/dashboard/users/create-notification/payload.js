@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/dashboard/users/create-notification", {data:[{}],fetch:{},mutations:[]});
