@@ -27,7 +27,6 @@
             <div class="flex justify-between items-center gap-x-4">
               <div>
                 <img
-                  @click="toggleDarkMode"
                   src="@/assets/icons/dashboard/moon.svg"
                   alt=""
                   class="cursor-pointer h-8 w-8"
@@ -61,14 +60,12 @@
           <div>
             <img
               v-if="!isDarkMode"
-              @click="toggleDarkMode"
               src="@/assets/icons/dashboard/moon.svg"
               alt=""
               class="cursor-pointer h-6 w-6"
             />
             <img
               v-if="isDarkMode"
-              @click="toggleDarkMode"
               src="@/assets/icons/dashboard/light-moon.svg"
               alt=""
               class="cursor-pointer h-6 w-6"
@@ -200,6 +197,11 @@ export default {
               urlPath: "/dashboard/stories",
               title: "Stories",
               icon: "stories",
+            },
+            {
+              urlPath: "/dashboard/notify",
+              title: "Notify",
+              icon: "bell",
             },
             {
               urlPath: "/dashboard/ad-service",
