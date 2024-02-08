@@ -1,10 +1,10 @@
 <template>
   <div
-    class="bg-white shadow rounded-md p-6 md:p-10 space-y-3 dark:border dark:border-white"
+    class="bg-white shadow rounded-md p-6 md:p-10 space-y-3"
   >
     <div class="md:flex space-y-4 md:space-y-0 justify-between items-center">
       <p
-        class="text-[#ACAFAE] text-sm md:text-lg font-light"
+        class="text-[#ACAFAE] text-sm md:text-lg font-medium"
       >
         Live traffic of logged in Active users
       </p>

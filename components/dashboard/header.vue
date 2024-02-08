@@ -58,15 +58,14 @@
         </div>
         <div class="flex justify-between items-center gap-x-4">
           <div>
-            <img
+            <!-- <img
               v-if="!isDarkMode"
               @click="toggleDarkMode"
               src="@/assets/icons/dashboard/moon.svg"
               alt=""
               class="cursor-pointer h-6 w-6"
-            />
+            /> -->
             <img
-              v-if="isDarkMode"
               @click="toggleDarkMode"
               src="@/assets/icons/dashboard/light-moon.svg"
               alt=""
@@ -74,15 +73,14 @@
             />
           </div>
           <div>
-            <img
+            <!-- <img
               v-if="isDarkMode"
               src="@/assets/icons/dashboard/white-hamburger.svg"
               alt=""
               @click="toggleSidebar"
               class="cursor-pointer h-6 w-6"
-            />
+            /> -->
             <img
-              v-if="!isDarkMode"
               src="@/assets/icons/dashboard/black-hamburger.svg"
               alt=""
               @click="toggleSidebar"

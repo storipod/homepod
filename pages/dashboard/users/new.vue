@@ -266,7 +266,6 @@ export default {
         this.form.imageSrc = URL.createObjectURL(file);
       } else {
         this.form.imageSrc = null;
-        // You can also add error handling here
       }
     },
     createUser() {

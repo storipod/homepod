@@ -54,33 +54,31 @@
         class="flex items-center justify-between border-b pb-3 md:hidden"
       >
         <div class="md:w-2/12">
-          <h6 class="font-medium dark:text-white">Welcome James! 😊</h6>
+          <h6 class="font-medium">Welcome James! 😊</h6>
         </div>
         <div class="flex justify-between items-center gap-x-4">
           <div>
             <img
-              v-if="!isDarkMode"
               src="@/assets/icons/dashboard/moon.svg"
               alt=""
               class="cursor-pointer h-6 w-6"
             />
-            <img
+            <!-- <img
               v-if="isDarkMode"
               src="@/assets/icons/dashboard/light-moon.svg"
               alt=""
               class="cursor-pointer h-6 w-6"
-            />
+            /> -->
           </div>
           <div>
-            <img
+            <!-- <img
               v-if="isDarkMode"
               src="@/assets/icons/dashboard/white-hamburger.svg"
               alt=""
               @click="toggleSidebar"
               class="cursor-pointer h-6 w-6"
-            />
+            /> -->
             <img
-              v-if="!isDarkMode"
               src="@/assets/icons/dashboard/black-hamburger.svg"
               alt=""
               @click="toggleSidebar"
@@ -127,7 +125,7 @@
                   v-for="itm in children"
                   @click.native="toggleSidebar"
                   :key="itm.title"
-                  class="flex w-full no-underline items-center gap-x-3 text-gray-500 rounded-md px-3 py-2.5 leading-loose dark:text-white"
+                  class="flex w-full no-underline items-center gap-x-3 text-gray-500 rounded-md px-3 py-2.5 leading-loose"
                   :to="itm.urlPath"
                   ><img
                     :src="require(`@/assets/icons/dashboard/${itm.icon}.svg`)"

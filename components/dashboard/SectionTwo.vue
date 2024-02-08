@@ -4,9 +4,7 @@
   >
     <!-- <test-chart /> -->
     <div class="lg:w-9/12 md:w-6/12"><ActivitiesChart /></div>
-    <div
-      class="lg:w-3/12 md:w-6/12 rounded-lg bg-white shadow-md space-y-6"
-    >
+    <div class="lg:w-3/12 md:w-6/12 rounded-lg bg-white shadow-md space-y-6">
       <div class="flex items-center justify-between px-7 py-4">
         <h6 class="font-medium text-gray-500">App Store information</h6>
         <select
@@ -36,7 +34,7 @@
                 <div>
                   <img
                     src="@/assets/icons/dashboard/star-group.svg"
-                    class=""
+                    class="w-32"
                     alt=""
                   />
                 </div>
@@ -57,7 +55,11 @@
             <p class="text-gray-400">Downloads</p>
             <div class="flex items-center gap-x-3">
               <p class="mt-3">4.8</p>
-              <img src="@/assets/icons/dashboard/star-group.svg" alt="" />
+              <img
+                src="@/assets/icons/dashboard/star-group.svg"
+                class="w-32"
+                alt=""
+              />
             </div>
           </div>
           <div>

@@ -2,7 +2,7 @@
   <div class="lg:flex gap-x-10 space-y-10 lg:space-y-0">
     <div class="lg:w-6/12 rounded-2xl bg-white p-6 shadow-md border space-y-6">
       <div class="space-y-2">
-        <h1 class="font-semibold text-sm md:text-lg">
+        <h1 class="font-semibold text-base md:text-lg">
           Most Recent
         </h1>
         <div>
@@ -81,7 +81,7 @@
           <tbody class="divide-y divide-gray-200">
             <tr v-for="(itm, idx) in tableData" :key="idx">
               <td
-                class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 bg-white"
+                class="whitespace-nowrap px-4 py-4 md:py-3 font-medium text-gray-900 bg-white"
               >
                 <nuxt-link :to="`/dashboard/users/${itm.id}`">
                   <img
@@ -92,21 +92,21 @@
                 </nuxt-link>
               </td>
               <td
-                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700"
+                class="whitespace-nowrap text-base md:text-sm px-4 py-4 md:py-3 text-gray-700"
               >
                 <nuxt-link class="text-blue-700 no-underline hover:underline" :to="`/dashboard/users/${itm.id}`">{{
                   itm.name
                 }}</nuxt-link>
               </td>
               <td
-                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700"
+                class="whitespace-nowrap text-base md:text-sm px-4 py-4 md:py-3 text-gray-700"
               >
                 <nuxt-link class="text-blue-700 no-underline hover:underline" :to="`/dashboard/users/${itm.id}}}`">{{
                   itm.email
                 }}</nuxt-link>
               </td>
               <td
-                class="whitespace-nowrap text-xs md:text-sm px-4 py-3 text-gray-700"
+                class="whitespace-nowrap text-base md:text-sm px-4 py-4 md:py-3 text-gray-700"
               >
                 <nuxt-link class="text-blue-700 no-underline hover:underline" :to="`/dashboard/users/${itm.id}}}`">
                   <img src="@/assets/icons/arrow-right.svg" alt="" />

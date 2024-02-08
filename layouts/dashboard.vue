@@ -18,14 +18,4 @@ export default {
     Breadcrumb,
   },
 };
-// export default {
-//   mounted() {
-//     if (!this.$store.state?.auth?.auth?.isLoggedIn) {
-//       const newQuery = { page: "login" };
-//       this.$router.push({ path: "/auth", query: newQuery });
-//     } else {
-//       this.$router.push({ path: "/dashboard" });
-//     }
-//   },
-// };
 </script>
