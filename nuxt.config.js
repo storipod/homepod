@@ -33,6 +33,10 @@ export default {
     { src: "@/plugins/mavon-editor", ssr: false },
     { src: "~/plugins/apexcharts", ssr: false },
     '~/plugins/bootstrap-vue.client',
+    '~/plugins/api-service.js',
+    { src: '~/plugins/persistedState.client.js' },
+    { src: '~/plugins/toastr.js', mode: 'client' },
+    '~/plugins/axios.js'
     // { src: '@/plugins/vuex-persist', client: true }
   ],
 
@@ -44,10 +48,13 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxt/postcss8",
     "@nuxtjs/composition-api/module",
+    '@nuxtjs/moment',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/axios',
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -58,6 +65,16 @@ export default {
       },
     },
     // vendor: ["vue-apexchart"],
+  },
+  axios: {
+    baseURL: 'https://api.develop.admin.storipod.app',
+    // baseURL: 'https://ec29-197-210-84-25.ngrok-free.app/api/v1/',
+    headers: {
+      common: {
+        // "X-API-KEY":"1fzkwjvxf6vp7Wp1OQ6kCzEX2QRWscpp",
+        // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwODYzNzQ3LCJpYXQiOjE3MTA4MDM3NDcsImp0aSI6ImUwYjZkZjM5MDFiMDRhN2RiMDk4YmI1MjQ4NzU2NTkyIiwidXNlcl9pZCI6MzZ9.OxKWBrEr9B4sRZ-wmL5c4wA5YECEUAun4CUlbdG_Ca8`
+      }
+    }
   },
   bootstrapVue: {
     icons: true,

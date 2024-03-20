@@ -2,7 +2,24 @@
   <main class="">
     <DashboardHeader @search="handleDashboardSearch" />
     <div class="p-4 md:px-10 space-y-10" v-if="!search.length">
-      <section-one />
+      <SectionOne :loading="loading" v-if="stats" :stats="stats" />
+      <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        <div v-for="itm in 4" :key="itm" class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+          <div class="animate-pulse flex space-x-4">
+            <div class="rounded-full bg-slate-700 h-10 w-10"></div>
+            <div class="flex-1 space-y-6 py-1">
+              <div class="h-2 bg-slate-700 rounded"></div>
+              <div class="space-y-3">
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+                  <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+                </div>
+                <div class="h-2 bg-slate-700 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <section-two />
       <section-three />
     </div>
@@ -28,14 +45,10 @@
           <h6 class="font-semibold text-gray-800">User</h6>
           <div class="flex">
             <UsersCardList class="w-10/12 py-0 my-0" :users="filteredUsers.slice(0, 5)" />
-            <div
-              @click="$router.push('/dashboard/users')"
-              class="w-2/12 cursor-pointer bg-white shadow h-[270px] rounded-lg border-gray-400 border-2 border-dashed mt-4 flex justify-center items-center"
-            >
+            <div @click="$router.push('/dashboard/users')"
+              class="w-2/12 cursor-pointer bg-white shadow h-[270px] rounded-lg border-gray-400 border-2 border-dashed mt-4 flex justify-center items-center">
               <div class="flex justify-center items-center flex-col gap-y-4">
-                <p
-                  class="font-bold text-gray-950 h-20 w-20 rounded-full flex justify-center items-center bg-gray-200"
-                >
+                <p class="font-bold text-gray-950 h-20 w-20 rounded-full flex justify-center items-center bg-gray-200">
                   +450
                 </p>
                 <p class="font-semibold text-gray-500">See more</p>
@@ -46,18 +59,11 @@
         <div class="border-t border-gray-300 space-y-4 py-6">
           <h6 class="font-semibold text-gray-800">Stories</h6>
           <div class="flex gap-x-6">
-            <StoriesCardList
-              class="w-full"
-              :stories="storiesList.slice(0, 5)"
-            />
-            <div
-              @click="$router.push('/dashboard/stories')"
-              class="w-2/12 cursor-pointer bg-white shadow h-[340px] rounded-lg border-gray-400 border-2 border-dashed mt-1 flex justify-center items-center"
-            >
+            <StoriesCardList class="w-full" :stories="storiesList.slice(0, 5)" />
+            <div @click="$router.push('/dashboard/stories')"
+              class="w-2/12 cursor-pointer bg-white shadow h-[340px] rounded-lg border-gray-400 border-2 border-dashed mt-1 flex justify-center items-center">
               <div class="flex justify-center items-center flex-col gap-y-4">
-                <p
-                  class="font-bold text-gray-950 h-20 w-20 rounded-full flex justify-center items-center bg-gray-200"
-                >
+                <p class="font-bold text-gray-950 h-20 w-20 rounded-full flex justify-center items-center bg-gray-200">
                   +930
                 </p>
                 <p class="font-semibold text-gray-500">See more</p>
@@ -82,6 +88,8 @@ export default {
   data() {
     return {
       search: "",
+      stats: null,
+      loading: false,
       usersList: [
         {
           id: 1,
@@ -239,6 +247,26 @@ export default {
     handleDashboardSearch(val) {
       this.search = val;
     },
+    async init() {
+      this.loading = true;
+      try {
+        const results = await Promise.allSettled([
+          this.$userApiService.getActiveUsers(),
+          this.$storiApiService.getAllStories(),
+          this.$userApiService.fetchUserEngagements(),
+          this.$userApiService.fetchUserSignups(),
+        ]);
+        console.log(results)
+        const [activeUsers, allStories, userEngagements, userSignups] = results.map(result =>
+          result.status === 'fulfilled' ? result.value : null
+        );
+        this.stats = { activeUsers, allStories, userEngagements, userSignups };
+      } catch (error) {
+        console.log(error, 'error here')
+      } finally {
+        this.loading = false;
+      }
+    }
   },
   computed: {
     filteredUsers() {
@@ -254,12 +282,15 @@ export default {
         });
         return filtered.length > 0 ? filtered : this.usersList;
       }
-    },
+    }
   },
   watch: {
     search(val) {
       console.log(val, "search was changed");
     },
   },
+  mounted() {
+    this.init()
+  }
 };
 </script>

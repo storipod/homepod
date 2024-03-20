@@ -2,25 +2,16 @@
   <main>
     <div class="lg:flex">
       <div class="lg:w-6/12 h-screen">
-        <login-component
-          v-if="$route.query.page === 'login'"
-          @forgotPassword="setActiveTab"
-          @processAdminLogin="handleLogin"
-        />
-        <forgot-password-component
-          v-else-if="$route.query.page === 'forgot'"
-          @success="handleForgotPasswordSuccess"
-          @redirectLogin="navigateToLogin"
-        />
-        <email-sent-success
-          v-else-if="$route.query.page === 'success'"
-          @redirectLogin="navigateToLogin"
-        />
+        <login-component v-if="$route.query.page === 'login'" @forgotPassword="setActiveTab"
+          @processAdminLogin="handleLogin" />
+        <forgot-password-component v-else-if="$route.query.page === 'forgot'" @success="handleForgotPasswordSuccess"
+          @redirectLogin="navigateToLogin" />
+        <email-sent-success v-else-if="$route.query.page === 'success'" @redirectLogin="navigateToLogin" />
       </div>
-      <div v-if="$route.query.page === 'login' || $route.query.page === 'forgot' || $route.query.page === 'success'" class="lg:w-6/12 hidden lg:block h-screen">
+      <div v-if="$route.query.page === 'login' || $route.query.page === 'forgot' || $route.query.page === 'success'"
+        class="lg:w-6/12 hidden lg:block h-screen">
         <section
-          class="relative hidden h-32 items-center justify-center bg-[#EBFFFF] lg:col-span-5 lg:flex lg:h-full xl:col-span-6"
-        >
+          class="relative hidden h-32 items-center justify-center bg-[#EBFFFF] lg:col-span-5 lg:flex lg:h-full xl:col-span-6">
           <div class="absolute right-10 top-4 flex items-end justify-end">
             <div class="flex items-center gap-x-10">
               <nuxt-link class="no-underline text-gray-800" to="#">Terms</nuxt-link>
@@ -28,39 +19,25 @@
             </div>
           </div>
           <div class="flex flex-col items-center justify-center">
-            <p
-              v-if="$route.query.page === 'login'"
-              class="text-lg font-medium leading-loose tracking-wider py-0 my-0"
-            >
+            <p v-if="$route.query.page === 'login'" class="text-lg font-medium leading-loose tracking-wider py-0 my-0">
               “Transforming data into actionable insights.”
             </p>
             <!-- <div class=""> -->
-              <img
-                alt="Login Animated Image"
-                src="@/assets/icons/animated-login.svg"
-                class="object-cover object-center"
-              />
+            <img alt="Login Animated Image" src="@/assets/icons/animated-login.svg"
+              class="object-cover object-center" />
             <!-- </div> -->
             <div v-if="$route.query.page === 'login'" class="">
-              <h2
-                class="mt-6 text-center text-2xl font-bold sm:text-3xl md:text-xl"
-              >
+              <h2 class="mt-6 text-center text-2xl font-bold sm:text-3xl md:text-xl">
                 Read. Write . Create
               </h2>
               <p class="mt-0 text-center leading-relaxed text-[#737876]">
                 Homepod Tells us about Storipod and Storipod is feeling
               </p>
             </div>
-            <p
-              v-else-if="$route.query.page === 'forgot'"
-              class="mt-4 text-center leading-relaxed text-[#737876]"
-            >
+            <p v-else-if="$route.query.page === 'forgot'" class="mt-4 text-center leading-relaxed text-[#737876]">
               Easily retrieve your password via email recovery.
             </p>
-            <div
-              v-if="$route.query.page === 'login'"
-              class="flex w-full items-center justify-between pt-10"
-            >
+            <div v-if="$route.query.page === 'login'" class="flex w-full items-center justify-between pt-10">
               <div>
                 <img src="@/assets/icons/arrow-left.svg" alt="" />
               </div>
@@ -93,6 +70,7 @@ export default {
     };
   },
   mounted() {
+    this.getEscrow()
     const newQuery = { page: "login" };
     this.$router.push({ path: "/auth", query: newQuery });
   },
@@ -112,7 +90,11 @@ export default {
     navigateToLogin() {
       const newQuery = { page: "login" };
       this.$router.push({ query: newQuery });
-    },
-  },
+    }
+    // async getEscrow() {
+    //   const response = await this.$userApiService.getEscrow();
+    //   console.log(response, 'response here')
+    // }
+  }
 };
 </script>

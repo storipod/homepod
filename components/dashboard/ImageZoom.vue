@@ -3,7 +3,7 @@
     <img
       :src="src"
       @click="toggleImage"
-      class="cursor-pointer"
+      class="cursor-pointer rounded-full h-10 w-10"
       alt=""
     />
     <div

@@ -128,6 +128,8 @@ export default {
   data() {
     return {
       isNotifyUser: false,
+      loadingStories: false,
+      storiesList: [],
       isNotificationSuccess: false,
       isRemoveStoriConfirmation: false,
       isRemoveStoriSuccess: false,
@@ -258,7 +260,22 @@ export default {
     removeUser() {
       this.isRemoveStoriConfirmation = true;
     },
+    async loadStories(){
+      try {
+        this.loadingStories = true;
+        const response = await this.$storiApiService.getAllStories();
+        console.log(response.result)
+        this.storiesList = response.result
+      } catch (error) {
+        this.$toastr.e(error.response.data.message)
+      } finally {
+        this.loadingStories = false;
+      }
+    }
   },
+  mounted(){
+    this.loadStories()
+  }
 };
 </script>
 

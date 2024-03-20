@@ -12,7 +12,7 @@ export default {
     LoadingSpinner,
   },
   mounted() {
-    if (!this.$store.state?.auth?.auth?.isLoggedIn) {
+    if (!this.$store?.state?.app?.isLoggedIn) {
       const newQuery = { page: "login" };
       this.$router.push({ path: "/auth", query: newQuery });
     } else {

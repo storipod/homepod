@@ -12,16 +12,16 @@
             <p class="text-sm text-white">Enter your credentials to login</p>
           </div>
           <div class="col-span-6 w-full">
-            <label for="Email" class="block text-sm font-medium text-white">
-              Email
+            <label for="username" class="block text-sm font-medium text-white">
+              username
             </label>
 
             <input
-              id="Email"
-              v-model="form.email"
-              type="email"
-              name="email"
-              placeholder="Enter Your Email..."
+              id="username"
+              v-model="form.username"
+              type="text"
+              name="username"
+              placeholder="Enter Your username..."
               class="mt-1 w-full rounded-md border border-gray-200 bg-white px-3 py-3.5 text-sm text-gray-700 shadow-sm outline-none"
             />
           </div>
@@ -86,14 +86,14 @@ export default {
       processing: false,
       showPassword: false,
       form: {
-        email: "",
+        username: "",
         password: "",
       },
     };
   },
   computed: {
     isFormEmpty() {
-      return !!(this.form.email && this.form.password);
+      return !!(this.form.username && this.form.password);
     },
   },
   watch: {
@@ -105,15 +105,23 @@ export default {
     setActiveTab() {
       this.$emit("forgotPassword");
     },
-    handleLogin() {
-      this.processing = true;
-      this.$emit("processAdminLogin", this.processing);
-      setTimeout(() => {
+    async handleLogin() {
+      try {
+        // this.processing = true;
+        // const response = await this.$userApiService.login(this.form);
+        // this.$store.commit('app/setAuthUser', response)
+        // this.$router.push('/dashboard')
+        this.processing = true;
+        const response = await this.$userApiService.login(this.form);
+        console.log(response, 'response here')
+        // this.$store.commit('app/setAuthUser', response)
+        // this.$router.push('/dashboard')
+      } catch (error) {
+        console.log(error)
+        this.$toastr.e(error?.response?.data?.message)
+      } finally {
         this.processing = false;
-        const user = { name: "John Doe", email: "john@example.com" };
-        this.$store.dispatch("auth/login", user);
-        this.$router.push("/dashboard");
-      }, 4000);
+      }
     },
   },
 };
