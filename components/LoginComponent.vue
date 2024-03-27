@@ -107,15 +107,10 @@ export default {
     },
     async handleLogin() {
       try {
-        // this.processing = true;
-        // const response = await this.$userApiService.login(this.form);
-        // this.$store.commit('app/setAuthUser', response)
-        // this.$router.push('/dashboard')
         this.processing = true;
         const response = await this.$userApiService.login(this.form);
-        console.log(response, 'response here')
-        // this.$store.commit('app/setAuthUser', response)
-        // this.$router.push('/dashboard')
+        this.$store.commit('app/setAuthUser', response)
+        this.$router.push('/dashboard')
       } catch (error) {
         console.log(error)
         this.$toastr.e(error?.response?.data?.message)

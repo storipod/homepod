@@ -70,7 +70,6 @@ export default {
     };
   },
   mounted() {
-    this.getEscrow()
     const newQuery = { page: "login" };
     this.$router.push({ path: "/auth", query: newQuery });
   },
@@ -91,10 +90,6 @@ export default {
       const newQuery = { page: "login" };
       this.$router.push({ query: newQuery });
     }
-    // async getEscrow() {
-    //   const response = await this.$userApiService.getEscrow();
-    //   console.log(response, 'response here')
-    // }
   }
 };
 </script>

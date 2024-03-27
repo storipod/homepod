@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { calculatePercentageChange } from '@/utils/statisticsHelper';
 export default {
   layout: "dashboard",
   data() {
@@ -30,18 +31,18 @@ export default {
       dashboardStats: [
         {
           title: "Total Active Users",
-          count: this.stats?.activeUsers?.total ?? 0,
+          count: this.stats?.activeUsers?.currentMonthCount ?? 0,
           desc: "Compared from Last Month",
-          rate: "-7.3%",
+          rate: calculatePercentageChange(this.stats.activeUsers?.currentMonthCount, this.stats.activeUsers?.lastMonthCount),
           progress: false,
           bg: "bg-[#FDF5F5]",
           chart: "active-users-spiral",
         },
         {
           title: "Sign ups",
-          count: this.stats?.userSignups?.total ?? 0,
+          count: this.stats?.userSignups?.currentMonthCount ?? 0,
           desc: "Compared from Last Month",
-          rate: "+2.4%",
+          rate: calculatePercentageChange(this.stats.userSignups?.currentMonthCount, this.stats.userSignups?.lastMonthCount),
           progress: true,
           bg: "bg-[#ECFCFE]",
           subTitle: "",
@@ -49,9 +50,9 @@ export default {
         },
         {
           title: "Stories",
-          count: this.stats?.allStories?.total ?? 0,
+          count: this.stats?.allStories?.currentMonthCount ?? 0,
           desc: "Compared from Last Month",
-          rate: "-9.7%",
+          rate: calculatePercentageChange(this.stats.allStories?.currentMonthCount, this.stats.allStories?.lastMonthCount),
           progress: false,
           bg: "bg-[#FFF8E3]",
           subTitle: "",
@@ -59,9 +60,9 @@ export default {
         },
         {
           title: "Engagement",
-          count: this.stats?.userEngagement?.count ?? 0,
+          count: this.stats?.userEngagement?.currentMonthCount ?? 0,
           desc: "Compared from Last Month",
-          rate: "+12%",
+          rate: calculatePercentageChange(this.stats.userEngagement?.currentMonthCount, this.stats.userEngagement?.lastMonthCount),
           progress: true,
           bg: "bg-[#f9efff]",
           subTitle: "",
@@ -81,27 +82,14 @@ export default {
       default: false
     }
   },
-  // mounted() {
-  //   this.init()
-  // },
-  // methods: {
-  //   init() {
-  //     if (Object.keys(this.stats?.activeUsers).length) {
-  //       this.dashboardStats[0].count = '300,000'
-  //     }
-
-  //     if (Object.keys(this.stats?.allStories).length) {
-  //       this.dashboardStats[2].count = '300,000'
-  //     }
-
-  //     if (Object.keys(this.stats?.userEngagements).length) {
-  //       this.dashboardStats[3].count = '300,000'
-  //     }
-
-  //     if (Object.keys(this.stats?.userSignups).length) {
-  //       this.dashboardStats[1].count = '300,000'
-  //     }
-  //   }
-  // }
+  computed: {
+    percentageChange() {
+      if (this.lastMonthCount === 0) {
+        return this.currentMonthCount > 0 ? 'Infinity%' : '0%';
+      }
+      const change = ((this.currentMonthCount - this.lastMonthCount) / this.lastMonthCount) * 100;
+      return change.toFixed(2); // Formats the number to two decimal places
+    },
+  },
 };
 </script>

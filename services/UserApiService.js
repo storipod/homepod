@@ -39,13 +39,4 @@ export default class UserApiService {
   fetchUserSignups(config = {}){
     return this.$axios.$get(`/user/signups`, config);
   }
-
-
-  // getEscrow(config = {}){
-  //   return this.$axios.$get(`admin/escrow/list/`, config);
-  // }
-
-  // $_load_escrow: (config = {}) {
-  //   return this.$axios.$get(`/admin/escrow/list/`, config);
-  // }
 }

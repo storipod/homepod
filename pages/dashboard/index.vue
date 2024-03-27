@@ -251,16 +251,18 @@ export default {
       this.loading = true;
       try {
         const results = await Promise.allSettled([
-          this.$userApiService.getActiveUsers(),
-          this.$storiApiService.getAllStories(),
-          this.$userApiService.fetchUserEngagements(),
-          this.$userApiService.fetchUserSignups(),
+          this.$dashboardStatsApiService.activeUserSummary(),
+          this.$dashboardStatsApiService.storySummary(),
+          this.$dashboardStatsApiService.storyEngagementSummary(),
+          this.$dashboardStatsApiService.signUpSummary(),
         ]);
         console.log(results)
         const [activeUsers, allStories, userEngagements, userSignups] = results.map(result =>
           result.status === 'fulfilled' ? result.value : null
         );
         this.stats = { activeUsers, allStories, userEngagements, userSignups };
+        console.log(this.stats, 'stats here')
+        this.loading = false;
       } catch (error) {
         console.log(error, 'error here')
       } finally {
