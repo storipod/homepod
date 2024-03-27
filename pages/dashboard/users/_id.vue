@@ -1,5 +1,5 @@
 <template>
-  <main class="space-y-6">
+  <main class="">
     <DashboardHeader>
       <template v-slot:action>
         <div class="relative">
@@ -14,7 +14,8 @@
             </template>
             <b-dropdown-item>Edit</b-dropdown-item>
             <b-dropdown-item>Remove User</b-dropdown-item>
-            <b-dropdown-item>Suspend</b-dropdown-item>
+            <b-dropdown-item @click="isModalOpen = true">{{ user.isActive ? 'Suspend' : 'Un-Suspend'
+              }}</b-dropdown-item>
           </b-dropdown>
         </div>
       </template>
@@ -132,19 +133,46 @@
         </div>
       </section>
     </section>
+
+    <Modal :isOpen="isModalOpen" @update:isOpen="isModalOpen = $event">
+      <section class="bg-white p-3 space-y-6 max-w-screen-lg rounded-md">
+        <div>
+          <img src="@/assets/icons/warning.svg" class="h-20 w-20" alt="warning" />
+        </div>
+        <div>
+          <h1 class="font-semibold text-xl">{{ user.isActive ? 'Suspend' : 'Un-Suspend' }} user</h1>
+          <p class="text-gray-500">
+            {{ user.isActive ? 'Are you sure you want to deactivate this user?' : 'Are you sure you want to reactivate this user?' }}
+          </p>
+        </div>
+        <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+          <button @click="isModalOpen = false"
+            class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-2.5 rounded-lg">
+            Cancel
+          </button>
+          <button :disabled="processingStatusUpdate" @click="handleRemoveUser" :class="[user.isActive ? 'bg-[#D92D20]' : 'bg-green-500']"
+            class="disabled:cursor-not-allowed disabled:opacity-25 text-sm w-full text-white font-medium px-6 py-2.5 rounded-lg">
+            {{ processingStatusUpdate ? "processing..." : `${user.isActive ? 'Suspend' : 'un suspend'}` }}
+          </button>
+        </div>
+      </section>
+    </Modal>
   </main>
 </template>
 
 <script>
+import Modal from '@/components/core/Modal.vue';
 import UserProfileDetails from "@/components/users/UserProfileDetails.vue";
 import UserActivitiesChart from "@/components/charts/UserActivitiesChart.vue";
 import Breadcrumb from "@/components/dashboard/Breadcrumb.vue";
 export default {
-  components: { UserActivitiesChart, Breadcrumb, UserProfileDetails },
+  components: { UserActivitiesChart, Breadcrumb, UserProfileDetails, Modal },
   layout: "dashboard",
   data() {
     return {
       activeTable: "insight",
+      processingStatusUpdate: false,
+      isModalOpen: false,
       user: {},
       loadingUser: false,
       activeTab: "default",
@@ -210,6 +238,7 @@ export default {
       try {
         this.loadingUser = true;
         const response = await this.$userApiService.getUserById(this.$route.params.id);
+        console.log(response, 'uer here')
         this.user = response
       } catch (error) {
         this.$toastr.e(error.response.data.message)
@@ -217,9 +246,24 @@ export default {
         this.loadingUser = false;
       }
     },
-    // generateInitials() {
-    //   return Object.keys(this.user) ? `${this?.user?.fname.charAt(0).toUpperCase()}${this?.user?.lname.charAt(0).toUpperCase()}` : ''
-    // }
+    openModal() {
+      this.isModalOpen = true;
+    },
+    async handleRemoveUser() {
+      this.processingStatusUpdate = true;
+      const payload = {
+        newStatus: this.user.isActive ? false : true
+      }
+      try {
+        await this.$userApiService.updateUserStatus(this.$route.params.id, payload);
+        this.getUserById()
+      } catch {
+        this.$toastr.e(error.response.data.message)
+      }finally {
+        this.processingStatusUpdate = false
+        this.isModalOpen = false
+      }
+    },
   },
   mounted() {
     this.getUserById()

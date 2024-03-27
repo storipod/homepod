@@ -39,4 +39,8 @@ export default class UserApiService {
   fetchUserSignups(config = {}){
     return this.$axios.$get(`/user/signups`, config);
   }
+
+  updateUserStatus(id, payload, config = {}){
+    return this.$axios.$post(`/user/${id}/status`, payload, config);
+  }
 }

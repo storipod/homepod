@@ -20,7 +20,7 @@
       <button @click="handleLogout"
         class="bg-[#0cb0bd] flex items-center gap-x-3 w-full rounded-md justify-center py-2.5">
         <img src="@/assets/icons/dashboard/avatar.svg" alt="" class="h-10 w-10" />
-        <span class="font-medium text-gray-900 text-sm">James Nelson</span>
+        <span class="font-medium text-gray-900 text-sm">{{ username ?? 'N/A' }}</span>
       </button>
     </div>
   </main>
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       isDarkMode: false,
+      user: {},
       sidebarItems: [
         {
           header: "",
@@ -92,6 +93,9 @@ export default {
         return localStorage.getItem("theme");
       }
     },
+    username() {
+      return Object.keys(this.$store?.state).length ? `${this?.user?.firstname} ${this?.user?.lastname}` : ''
+    }
   },
   methods: {
     handleLogout() {
@@ -120,6 +124,11 @@ export default {
         }
       });
     },
+  },
+  mounted() {
+    if (this.$store?.state?.app?.isLoggedIn) {
+      this.user = this.$store?.state?.app?.auth?.user
+    }
   },
 };
 </script>

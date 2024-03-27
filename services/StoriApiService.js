@@ -3,19 +3,11 @@ export default class StoriApiService {
     this.$axios = $axios;
   }
 
-  getAllStories(config = {}) {
-    return this.$axios.$get(`/story?sortBy`, config);
+  getAllStories(filter, config = {}) {
+    return this.$axios.$get(`story?page=1&limit=10&sortBy=${filter}`, config);
   }
 
   getStoriesById(id, config = {}) {
     return this.$axios.$get(`/story/${id}`, config);
-  }
-
-  getStorySummary(config = {}) {
-    return this.$axios.$get(`/story/summary`, config);
-  }
-
-  getEngagementSummary(config = {}) {
-    return this.$axios.$get(`/story/engagement-summary`, config);
   }
 }

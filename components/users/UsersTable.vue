@@ -166,6 +166,7 @@ export default {
       this.$bvModal.show("removeUserConfirmation");
     },
     toggleUserStatus(user) {
+      this.$emit('selectedUser', user)
       if (user.isActive) {
         this.$bvModal.show("userSuspendModal");
       } else {

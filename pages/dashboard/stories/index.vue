@@ -4,9 +4,7 @@
     <div class="mx-3 md:mx-6">
       <table-tabs class="mt-4" />
     </div>
-    <section
-      class="bg-white md:rounded-lg p-6 lg:p-10 space-y-10 mx-3 pb-6"
-    >
+    <section class="bg-white md:rounded-lg p-6 lg:p-10 space-y-10 mx-3 pb-6">
       <div class="lg:flex justify-between items-center space-y-3 lg:space-y-0">
         <div>
           <h6 class="font-semibold text-gray-900">Stori</h6>
@@ -14,89 +12,20 @@
         <div>
           <div class="flex items-center gap-x-10">
             <img src="@/assets/icons/dashboard/search.svg" cl alt="" />
-            <!-- <div class="flex items-center gap-x-1">
-              <h1 class="font-semibold text-gray-300">Sort by:</h1>
-              <select class="outline-none border-none text-gray-900">
-                <option>Newest</option>
-                <option>Popularity</option>
-                <option>Time</option>
-              </select>
-            </div> -->
             <div class="flex items-center gap-x-3">
               <p class="font-semibold text-sm text-gray-600 mt-3">Sort by:</p>
-              <select
-                class="outline-none border-none text-sm bg-gray-100 py-2 px-3 rounded-md text-gray-900"
-              >
-                <option>Newest</option>
-                <option>Popularity</option>
-                <option>Time</option>
+              <select v-model="filter"
+                class="outline-none border-none text-sm bg-gray-100 py-2 px-3 rounded-md text-gray-900">
+                <option value="popularity">Popularity</option>
               </select>
             </div>
             <img src="@/assets/icons/dashboard/filter.svg" alt="" />
           </div>
         </div>
       </div>
-      <StoriesCardList :stories="stories" />
-      <!-- <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-      >
-        <div
-          v-for="(itm, idx) in stories"
-          :key="idx"
-          class="rounded-lg border border-gray-200 space-y-6"
-        >
-          <div class="flex justify-end items-end px-4 pt-4 relative">
-            <img
-              class="cursor-pointer"
-              @click="toggleDropdown(idx)"
-              src="@/assets/icons/horizontal-more.svg"
-              alt=""
-            />
-            <div
-              v-if="openDropdown === idx"
-              class="absolute mt-2 w-40 top-4 h-32 bg-white rounded-lg border-[0.7px] shadow-xl z-50 px-6 pt-6"
-            >
-              <div class="space-y-3 flex justify-start items-start flex-col">
-                <div>
-                  <button @click="notifyUser(itm)" class="font-medium">
-                    Notify User
-                  </button>
-                </div>
-                <div>
-                  <button
-                    class="text-red-500 font-medium"
-                    @click="removeUser(itm)"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="px-4">
-            <img
-              src="@/assets/img/stori.png"
-              class="h-10 w-10 rounded-full"
-              alt=""
-            />
-          </div>
-          <h1 class="px-4 text-sm text-gray-700">{{ itm.desc }}</h1>
-          <div class="flex justify-between items-center px-4">
-            <img src="@/assets/icons/reactions.svg" alt="" />
-            <img src="@/assets/icons/stori-eclipse.svg" alt="" />
-          </div>
-          <div class="border-t border-gray-300 flex justify-end items-end">
-            <p class="text-gray-400 text-sm font-medium px-4 py-4">
-              {{ itm.date }}
-            </p>
-          </div>
-        </div>
-      </div> -->
-      <PaginationTable
-        :totalPages="totalPages"
-        :currentPage="currentPage"
-        @page-changed="updateCurrentPage"
-      />
+      <EmptyState title="No Stories available" desc="Get started by creating a new stori." v-if="!loadingStories" />
+      <LoadingComponent v-if="loadingStories" />
+      <StoriesCardList v-else :stories="storiesList" />
     </section>
     <!-- <notify-user-modal
       :isLoading="isNotifyUser"
@@ -120,6 +49,8 @@
 </template>
 
 <script>
+import EmptyState from '@/components/core/EmptyState.vue';
+import LoadingComponent from '@/components/core/LoadingComponent.vue';
 import StoriesCardList from "@/components/stories/storiesCardList.vue";
 import TableTabs from "@/components/dashboard/TableTabs.vue";
 import PaginationTable from "@/components/dashboard/PaginationTable.vue";
@@ -129,6 +60,7 @@ export default {
     return {
       isNotifyUser: false,
       loadingStories: false,
+      filter: "",
       storiesList: [],
       isNotificationSuccess: false,
       isRemoveStoriConfirmation: false,
@@ -136,101 +68,11 @@ export default {
       openDropdown: null,
       currentPage: 1,
       totalPages: 10, // Replace with your total pages,
-      stories: [
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-        {
-          image: "",
-          desc: "Courtney Brown is here to give y’all premium gist. Follow Courtney Brown ",
-          count: "200",
-          date: "24th August, 2022",
-        },
-      ],
     };
   },
   components: {
+    EmptyState,
+    LoadingComponent,
     StoriesCardList,
     TableTabs,
     PaginationTable,
@@ -260,11 +102,10 @@ export default {
     removeUser() {
       this.isRemoveStoriConfirmation = true;
     },
-    async loadStories(){
+    async loadStories() {
       try {
         this.loadingStories = true;
-        const response = await this.$storiApiService.getAllStories();
-        console.log(response.result)
+        const response = await this.$storiApiService.getAllStories(this.filter);
         this.storiesList = response.result
       } catch (error) {
         this.$toastr.e(error.response.data.message)
@@ -273,11 +114,15 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     this.loadStories()
+  },
+  watch: {
+    filter() {
+      this.loadStories()
+    }
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

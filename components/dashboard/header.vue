@@ -92,7 +92,7 @@
           <div class="w-full">
             <button class="bg-[#0cb0bd] flex items-center gap-x-3 w-full rounded-md justify-center py-2.5">
               <img src="@/assets/icons/dashboard/avatar.svg" alt="" class="h-10 w-10" />
-              <span class="font-medium text-gray-900 text-sm">James Nelson</span>
+              <span class="font-medium text-gray-900 text-sm">{{ username ?? 'N/A' }}</span>
             </button>
           </div>
         </main>

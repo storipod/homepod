@@ -34,7 +34,7 @@
           </div>
         </div>
         <div v-if="tableView === 'list'" class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <UsersTable v-if="usersList.length && !loadingUsers" :usersList="usersList" :loadingUsers="loadingUsers" />
+          <UsersTable v-if="usersList.length && !loadingUsers" :usersList="usersList" :loadingUsers="loadingUsers" @selectedUser="handleSelectedUser" />
           <EmptyState v-if="usersList.length <= 0 && !loadingUsers" title="No User available"
             desc="Get started by creating a new user." />
           <!-- <LoadingSpinner v-if="loadingUsers" /> -->
@@ -239,6 +239,7 @@ export default {
       processingDelete: false,
       processingActivation: false,
       processingSuspension: false,
+      selectedUser: {},
       usersList: [],
       metadata: {},
       currentPage: 1,
@@ -259,6 +260,10 @@ export default {
     },
   },
   methods: {
+    handleSelectedUser(data){
+      console.log(data, 'data here')
+      this.selectedUser = data
+    },
     handleTableView(itm) {
       this.tableView = itm;
     },
@@ -276,23 +281,39 @@ export default {
         this.processingDelete = false;
       }, 3000);
     },
-    handleUserActivation() {
+    async handleUserActivation() {
       this.processingActivation = true;
-      setTimeout(() => {
+      const payload = {
+        newStatus: this.selectedUser.isActive ? false : true
+      }
+      try {
+        await this.$userApiService.updateUserStatus(this.selectedUser.id, payload);
         this.$bvModal.hide("activateUserConfirmation");
         this.$bvModal.show("activateUserSuccess");
+        this.loadUsers()
+      } catch {
+        this.$toastr.e(error.response.data.message)
+      }finally {
         this.processingActivation = false;
-      }, 3000);
+      }
     },
-    proceedToSuspendUser() {
+    async proceedToSuspendUser() {
       this.$bvModal.hide("userSuspendModal");
       this.$bvModal.show("userSuspendConfirmationModal");
       this.processingSuspension = true;
-      setTimeout(() => {
+      const payload = {
+        newStatus: this.selectedUser.isActive ? false : true
+      }
+      try {
+        await this.$userApiService.updateUserStatus(this.selectedUser.id, payload);
         this.$bvModal.hide("userSuspendConfirmationModal");
         this.$bvModal.show("userSuspendSuccessModal");
+        this.loadUsers()
+      } catch {
+        this.$toastr.e(error.response.data.message)
+      }finally {
         this.processingSuspension = false;
-      }, 3000);
+      }
     },
     handleConfirmSuspension() {
       this.$bvModal.hide("userSuspendModal");
